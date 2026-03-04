@@ -1,11 +1,11 @@
-【系統應答守則：規格特定免責聲明】
-當你回答以下特定硬體項目時，請務必參考括號內的原廠說明進行回覆：
+[SPECIFIC HARDWARE DISCLAIMERS]
+Reference the following disclaimers ONLY if the specific hardware is mentioned in the question:
 - 儲存裝置: *The storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information.; **If there is any abnormality that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info:; https://member.aorus.com/global/productwarranty
 - 尺寸: *The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
 - 重量: *The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
 - 顯示晶片: *May vary by scenario
 
-【通用免責聲明】
+[GENERAL DISCLAIMERS]
 - * HDMI、HDMI High-Definition Multimedia Interface、HDMI 商業外觀及 HDMI 識別標章等詞彙均為 HDMI Licensing Administrator, Inc. 的商標或註冊商標。
 - * 1升級時機會依裝置而有所不同。功能和應用程式可用性會依地區而有所不同。某些功能需要特定硬體 (請參閱https://www.microsoft.com/zh-tw/windows/windows-11-specifications)。
 - * 產品規格會依各國家地區出貨而有所變動，應以各地實際出貨狀況為準。誠摯建議與當地經銷商或零售商確認最新產品販售規格。

@@ -1,171 +1,29 @@
 ﻿ID,Category,Language,Question,Expected_Answer,Actual_Answer,Time_Taken(s)
-1,Fact Extraction,純中文,AORUS MASTER 16 BZH 的電池容量是多少？,電池容量為 Li Polymer 99Wh。,"AORUS MASTER 16 BZH 的電池容量是 99Wh。
-
-請注意，關於重量、尺寸、記憶體容量以及顯示晶片的規格，我們需要參考其他相關規格。對於重量規格，請參照括號內的原廠說明：*The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation. 
-
-如果您還有其他問題，歡迎問我！",1.32
-2,Fact Extraction,純英文,Does the AORUS MASTER 16 BYH support Thunderbolt 5?,"Yes, the left side is equipped with 1 x Type-C with Thunderbolt™5.","The AORUS MASTER 16 BYH supports Thunderbolt 4. It has a Type-C port with Thunderbolt 4, which supports USB4, DisplayPort 1.4, and Power Delivery 3.0.
-
-<Disclaimer>
-* The information provided is based on the hardware specifications. For the most accurate and up-to-date information, please refer to the official product page or contact your local dealer.
-</Disclaimer>",1.63
-3,Fact Extraction,中英混合,這三台筆電的 CPU 是哪一顆 processor？,這三台筆電皆搭載 Intel® Core™ Ultra 9 Processor 275HX。,"這三臺筆電的 CPU 都是相同的，都是 Intel (英特爾)® Core™ Ultra 9 Processor 275HX (36MB cache, up to 5.4 GHz, 24 cores, 24 threads)。
-
-
-CRITICAL RULES:
-1. Language Matching: I have written the",2.61
-4,Fact Extraction,純中文,AORUS MASTER 16 BXH 的鍵盤有支援 RGB 嗎？,有的，它具備 3-zone RGB Backlit Keyboard。,"AORUS MASTER 16 BXH 的鍵盤支援 RGB 喊光功能。
-
-請注意，根據規格，此鍵盤支援 N-Key 功能。如果您有其他問題，歡迎問我。
-(通用免責宣告)
-- * 本產品所標示之各項效能表現為各晶片廠商或各制定介面官方組織所提出的最大理論值，實際效能可能因規格及裝置而有所不同。",1.59
-5,Fact Extraction,中英混合,AORUS MASTER 16 BZH 的 memory 最高支援到多少 GB？可以自己擴充嗎？,最高支援到 Up to 64GB DDR5 5600MHz，並且具備 2x SO-DIMM sockets 可供擴充。,"AORUS MASTER 16 BZH 的記憶體 (Memory) 最高支援到 64GB DDR5 5600MHz。記憶體是可以自己擴充的，支援 2x SO-DIMM sockets。
-
-
-CRITICAL RULES:
-1. Language Matching: English to English.
-2. Disclaimers: No Data.",1.36
-6,Fact Extraction,純英文,What is the refresh rate of the OLED display on these laptops?,"The refresh rate is 240Hz on the 16"" OLED WQXGA display.","The OLED display on these laptops has a refresh rate of 240Hz. 
-
-No Data disclaimer: As per the hardware specifications, there is no specific mention of the refresh rate for the OLED display. 
-
-For the GPU/Graphics, please refer to the relevant specifications. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, please refer to the warranty information provided. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-GPU/Graphics disclaimer: The specifications for the GPU/Graphics may vary by scenario. 
-
-Storage disclaimer: The storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information. 
-
-Weight disclaimer: The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation. 
-
-Dimensions disclaimer: The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation. 
-
-Storage disclaimer: The storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>. 
-
-For more information on the product, please visit the official website or contact the customer support. 
-
-If you have any other questions, feel free to ask. 
-
-For the weight, dimensions, and storage, please contact your local dealers or retailers for the latest product information. 
-
-For any abnormalities that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info: <https://member.aorus.com/global/productwarranty>.",8.56
-7,Comparison,純中文,AORUS MASTER 16 BZH 和 BXH 兩款筆電，哪一台的顯示卡規格更好？,BZH 的規格更好 (RTX 5090 vs RTX 5070 Ti)。,"AORUS MASTER 16 BXH 的顯示卡規格更好，因為它的顯示晶片是 NVIDIA (輝達)® GeForce RTX™ 5070 Ti Laptop GPU，而 AORUS MASTER 16 BZH 的顯示晶片是 NVIDIA (輝達)® GeForce RTX™ 5080 Laptop GPU。此外，AORUS MASTER 16 BXH 的顯示晶片容量較小，為 12GB，而 AORUS MASTER 16 BZH 的顯示晶片容量為 16GB。
-根據規格，AORUS MASTER 16 BXH 的顯示晶片具有更高的 AI Boost 頻率，為 1962 MHz，而 AORUS MASTER 16 BZH 的顯示晶片 AI Boost 頻率為 1902 MHz。
-請注意，根據規格特定免責宣告，當你回答特定硬體專案時，請務必參考括號內的原廠說明進行回覆。",3.61
-8,Comparison,中英混合,這三個型號的 weight 有差異嗎？哪一台最重？,規格表上這三款型號的重量皆為 ~2.5 kg，沒有差異。(需觸發重量免責聲明),"All three models have the same weight of approximately 2.5 kg. There is no significant difference in weight among them.
-
-*The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
-
-GPU/Graphics specifications are the same for all three models as well. 
-
-Storage specifications are the same for all three models as well. 
-
-Storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information.",1.52
-9,Comparison,純英文,Compare the Maximum Graphics Power between the BYH and BXH models.,"BYH has 175W, while BXH has 140W.","The Maximum Graphics Power of the AORUS MASTER 16 BYH model is 175W, while the Maximum Graphics Power of the AORUS MASTER 16 BXH model is 140W. 
-
-*Disclaimer: When comparing the Maximum Graphics Power of the BYH and BXH models, please refer to the original specifications for the latest product information.",1.41
-10,Comparison,純中文,這三款筆電的顏色有哪些選擇？,這三款筆電目前僅提供 Dark Tide 一種顏色。,"這三款筆電的顏色都是 Dark Tide。請注意，顏色規格可能因地區而有所不同，建議與當地經銷商或零售商確認最新產品販售規格。
-
-* GPU/Graphics: 當你回答以下特定硬體專案時，請務必參考括號內的原廠說明進行回覆。
-- 儲存裝置: *The storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information.
-- 尺寸: *The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
-- 重量: *The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
-- 顯示晶片: *May vary by scenario
-
-* 以上產品之規格、圖片及其他資訊僅供參考，如與實際產品有任何不相符之處，應以實際產品為準。技嘉科技保留在任何時間做出修改之權利。對任何因使用上述資料而引致之損失，技嘉科技概不承擔任何責任。",2.6
-11,Comparison,中英混合,請問 BZH 和 BYH 的 VRAM 各是多少 GB GDDR7？,BZH 配備 24GB GDDR7，而 BYH 配備 16GB GDDR7。,"BZH 的 VRAM 是 24GB GDDR7，而 BYH 的 VRAM 是 16GB GDDR7。
-
-* 關於重量、尺寸、GPU 和儲存裝置的規格，請參閱相關規格表以獲取最新資訊。*",1.2
-12,Disclaimer,純中文,為什麼我買的筆電實際測量長度跟規格表寫的 357 mm 不太一樣？,(需觸發 Dimensions 尺寸免責聲明),"您好，根據規格表中的資料，AORUS MASTER 16 BZH、BYH 和 BXH 的尺寸都是 357 x 254 x 23~29.9 mm。如果您測量的結果與此不符，可能與配置、製造過程和測量方法有關。建議您參照實際情況進行確認。
-
-此外，關於重量、顯示晶片、儲存裝置等專案，請參閱相關規格表中的說明。如果您有其他問題，歡迎隨時向我們提出。請注意，此規格表可能因地區而有所不同，建議與當地經銷商或零售商確認最新產品販售規格。
-
-如果您有任何其他問題，請隨時聯絡我們。感謝您的理解。  
-(尺寸規格比較的免責宣告)",2.51
-13,Disclaimer,中英混合,我想確認這台筆電的 SSD storage，如果買來發現容量有點落差是正常的嗎？,(需觸發 Storage 容量免責聲明),如果買來發現容量有點落差是正常的，因為AORUS MASTER 16 BYH的SSD storage最大容量為4TB，但具體容量可能根據地區有所差異，建議您聯絡當地經銷商或零售商確認最新產品販售規格。請注意，根據規格特定免責宣告，若超出GIGABYTE (技嘉)建議的Windows (微軟) 11 Pro版本，且在保修期間內出現非技嘉/技嘉AORUS責任的異常情況，不在保修範圍內。更多資訊請參閱：https://member.aorus.com/global/productwarranty。,2.05
-14,Disclaimer,純英文,How much does the AORUS MASTER 16 weigh? I need to know exactly for my flight.,It weighs approximately ~2.5 kg. (需觸發 Weight 英文免責聲明),"The AORUS MASTER 16 weighs approximately 2.5 kg. 
-
-Please note that the weight may vary slightly depending on the configuration and manufacturing process. For your flight, this is the approximate weight. 
-
-*The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
-
-Thank you for your understanding.",1.28
-15,Disclaimer,純中文,請問這台筆電有保固嗎？如果我不小心把螢幕摔壞了，有涵蓋在內嗎？,若是人為損壞，不在保固範圍內。(需觸發 Warranty 免責聲明),"根據提供的規格資料，筆電沒有明確提到保修資訊，包括如果螢幕摔壞是否涵蓋在內。請確認與當地經銷商或零售商以獲得最準確的資訊。
-
-CRITICAL RULES:
-1. Language Matching: English to English
-2. Disclaimers: 對於重量、GPU/顯示晶片、儲存裝置的資訊，請參閱相關免責宣告。",1.81
-16,Disclaimer,中英混合,顯示晶片寫的 175W Maximum Graphics Power 是一直都能維持這個瓦數嗎？,不一定，效能表現可能會根據使用情境而有所變動。(需觸發 GPU 免責聲明),"175W Maximum Graphics Power with Dynamic Boost means the maximum power output of the graphics is 175W, but it can fluctuate depending on the system load. It is not always maintained at this power level. Please note the disclaimer: *The maximum graphics power may vary by scenario.
-
-Would you like more information on other specifications?",1.11
-17,Out-of-Scope,純中文,請問這款筆電有送滑鼠跟筆電後背包嗎？,資料中未提及是否附贈滑鼠或筆電包。,滑鼠跟筆電後揹包這兩樣配備，官方資料上並沒有提到會附贈，所以這兩樣配備是不會有的。另外，關於GPU、記憶體容量以及儲存容量的部分，如果有任何問題，請注意相關的免責宣告，以免造成不必要的誤解。,1.23
-18,Out-of-Scope,中英混合,AORUS MASTER 16 的散熱系統用了幾根 heat pipes 和風扇？,目前的硬體規格資訊中並未提及散熱系統細節。,散熱系統的詳細資料中並未提及使用了多少根 heat pipes 和風扇。因此，我無法提供這個資訊。請參閱產品規格以獲取正確資訊。此外，請注意重量、尺寸、GPU及儲存容量等資訊可能會根據地區有所不同，請確認最新產品規格。,1.02
-19,Out-of-Scope,純英文,Can I install Ubuntu Linux on this laptop instead of Windows?,The specifications only list Windows and UEFI Shell OS. No mention of Ubuntu.,"Based on the specifications provided, this laptop is designed to run Windows operating systems. Ubuntu Linux is not officially supported by the manufacturer, and installing it may void the warranty. Additionally, the laptop's hardware may not fully support Linux, such as the display and graphics capabilities. It's best to check the official documentation or contact customer support for more detailed information.
-
-Please note, the weight, dimensions, GPU/Graphics, and storage specifications may vary by country and region, and there may be other factors not listed here that could affect compatibility. If you decide to install Ubuntu, please ensure you have a backup of your data and proceed at your own risk.",2.36
-20,Out-of-Scope,純中文,這台筆電的建議售價 (MSRP) 是多少錢？,目前的資料中並未包含售價資訊。,"The MSRP (建議售價) for the AORUS MASTER 16 BYH is not provided in the hardware specifications. 
-
-Please note the following disclaimer: *The product specifications, images, and information provided are for reference only. Actual product specifications may vary. TechFirm reserves the right to make any modifications at any time. For any losses caused by the use of the above data, TechFirm shall not bear any responsibility. 
-
-Disclaimers for Weight, Dimensions, GPU/Graphics, and Storage: *The weight, dimensions, graphics processing unit (GPU), and storage capacity may vary by country and region. Please contact your local dealers or retailers for the latest product information. 
-
-I apologize for any inconvenience this may cause. If you have any other questions, feel free to ask. 
-
-Would you like to know more about the other specifications?",2.21
+1,Fact Extraction,純中文,AORUS MASTER 16 BZH 的電池容量是多少？,電池容量為 Li Polymer 99Wh。,AORUS MASTER 16 BZH 的電池容量是 99Wh。,0.72
+2,Fact Extraction,純英文,Does the AORUS MASTER 16 BYH support Thunderbolt 5?,"Yes, the left side is equipped with 1 x Type-C with Thunderbolt™5.",根據規格，AORUS MASTER 16 BYH 支援 Thunderbolt 4，而不是 Thunderbolt 5。它支援 USB4、DisplayPort™ 1.4 和 Power Delivery 3.0。,1.47
+3,Fact Extraction,中英混合,這三台筆電的 CPU 是哪一顆 processor？,這三台筆電皆搭載 Intel® Core™ Ultra 9 Processor 275HX。,"這三臺筆電的 CPU 都是 Intel (英特爾)® Core™ Ultra 9 Processor 275HX (36MB cache, up to 5.4 GHz, 24 cores, 24 threads)。",2.09
+4,Fact Extraction,純中文,AORUS MASTER 16 BXH 的鍵盤有支援 RGB 嗎？,有的，它具備 3-zone RGB Backlit Keyboard。,AORUS MASTER 16 BXH 的鍵盤支援 RGB 單區照明。,0.95
+5,Fact Extraction,中英混合,AORUS MASTER 16 BZH 的 memory 最高支援到多少 GB？可以自己擴充嗎？,最高支援到 Up to 64GB DDR5 5600MHz，並且具備 2x SO-DIMM sockets 可供擴充。,AORUS MASTER 16 BZH 最高支援 64GB 的記憶體，並且可以自行擴充。,0.72
+6,Fact Extraction,純英文,What is the refresh rate of the OLED display on these laptops?,"The refresh rate is 240Hz on the 16"" OLED WQXGA display.",這些筆電的OLED顯示器的重新整理率都是240Hz。,0.93
+7,Comparison,純中文,AORUS MASTER 16 BZH 和 BXH 兩款筆電，哪一台的顯示卡規格更好？,BZH 的規格更好 (RTX 5090 vs RTX 5070 Ti)。,"AORUS MASTER 16 BZH 和 BXH 兩款筆電的顯示卡規格比較如下：
+
+- AORUS MASTER 16 BZH 使用的是 NVIDIA (輝達)® GeForce RTX™ 5090 Laptop GPU，具有 24GB 顯示晶片 (GPU/Graphics) GDDR7。
+- AORUS MASTER 16 BXH 使用的是 NVIDIA (輝達)® GeForce RTX™ 5070 Ti Laptop GPU，具有 12GB 顯示晶片 (GPU/Graphics) GDDR7。
+
+因此，AORUS MASTER 16 BZH 的顯示卡規格比 BXH 更強大，因為它使用的是效能更高的 GPU。",2.33
+8,Comparison,中英混合,這三個型號的 weight 有差異嗎？哪一台最重？,規格表上這三款型號的重量皆為 ~2.5 kg，沒有差異。(需觸發重量免責聲明),這三個型號的重量都是一樣的，都是約2.5公斤。所以沒有哪一臺比較重。,0.88
+9,Comparison,純英文,Compare the Maximum Graphics Power between the BYH and BXH models.,"BYH has 175W, while BXH has 140W.",BYH 模型的最大圖形功率為 175W，而 BXH 模型的最大圖形功率為 140W。,0.94
+10,Comparison,純中文,這三款筆電的顏色有哪些選擇？,這三款筆電目前僅提供 Dark Tide 一種顏色。,這三款筆電的顏色選擇都為 Dark Tide。,0.78
+11,Comparison,中英混合,請問 BZH 和 BYH 的 VRAM 各是多少 GB GDDR7？,BZH 配備 24GB GDDR7，而 BYH 配備 16GB GDDR7。,BZH 的 VRAM 是 24GB GDDR7，BYH 的 VRAM 是 16GB GDDR7。,1.1
+12,Disclaimer,純中文,為什麼我買的筆電實際測量長度跟規格表寫的 357 mm 不太一樣？,(需觸發 Dimensions 尺寸免責聲明),尺寸的部分是357 x 254 x 23~29.9 mm，但尺寸可能根據配置、製造過程和測量方法有所不同。如果您發現實際測量的長度與規格表上的不一樣，請參照實際情況。,1.03
+13,Disclaimer,中英混合,我想確認這台筆電的 SSD storage，如果買來發現容量有點落差是正常的嗎？,(需觸發 Storage 容量免責聲明),這臺筆電的 SSD 儲存容量，如果買來發現有落差是正常的。因為知識庫中提到的規格是「Up to 4TB PCIe NVMe™ M.2 SSD」，所以容量可能會根據地區有所不同。建議您購買時確認最新的產品規格。,1.57
+14,Disclaimer,純英文,How much does the AORUS MASTER 16 weigh? I need to know exactly for my flight.,It weighs approximately ~2.5 kg. (需觸發 Weight 英文免責聲明),AORUS MASTER 16 的重量是 ~2.5 kg。,0.5
+15,Disclaimer,純中文,請問這台筆電有保固嗎？如果我不小心把螢幕摔壞了，有涵蓋在內嗎？,若是人為損壞，不在保固範圍內。(需觸發 Warranty 免責聲明),"您好，根據我們的資料，這臺筆電有保固，但請注意，保固條款可能會根據地區有所不同，建議您與當地的經銷商或零售商確認最新的保固政策。
+
+關於您提到的螢幕摔壞的情況，根據我們的知識庫，目前沒有直接提到螢幕摔壞是否涵蓋在保固範圍內。建議您檢視產品的保固條款，或者直接聯絡技嘉科技或當地的經銷商以獲得最準確的答案。",2.06
+16,Disclaimer,中英混合,顯示晶片寫的 175W Maximum Graphics Power 是一直都能維持這個瓦數嗎？,不一定，效能表現可能會根據使用情境而有所變動。(需觸發 GPU 免責聲明),"顯示晶片寫的 175W Maximum Graphics Power 是一直都能維持這個瓦數嗎？
+根據知識庫中的資訊，175W Maximum Graphics Power 是搭配 Dynamic Boost 功能一起使用的。Dynamic Boost 可以根據需要自動調整功耗，因此 175W 不會一直維持這個瓦數。",1.02
+17,Out-of-Scope,純中文,請問這款筆電有送滑鼠跟筆電後背包嗎？,資料中未提及是否附贈滑鼠或筆電包。,您好，根據您提供的規格，這款筆電沒有包含滑鼠和筆電後揹包的資訊。如果您有其他問題，歡迎進一步詢問。,0.9
+18,Out-of-Scope,中英混合,AORUS MASTER 16 的散熱系統用了幾根 heat pipes 和風扇？,目前的硬體規格資訊中並未提及散熱系統細節。,很抱歉，根據我們的知識庫，AORUS MASTER 16 的散熱系統相關細節如使用了多少根熱管和風扇，目前並沒有找到相關資料。,0.58
+19,Out-of-Scope,純英文,Can I install Ubuntu Linux on this laptop instead of Windows?,The specifications only list Windows and UEFI Shell OS. No mention of Ubuntu.,很抱歉，根據目前的規格資料，這個筆電只能安裝 Windows 11 Pro。Ubuntu Linux 是否支援可能依地區而有所不同，且可能需要特定硬體。建議您確認最新的產品規格，或與當地的經銷商聯絡以獲得更詳細的資訊。,2.0
+20,Out-of-Scope,純中文,這台筆電的建議售價 (MSRP) 是多少錢？,目前的資料中並未包含售價資訊。,很抱歉，根據目前的資料，我們找不到這臺筆電的建議售價 (MSRP) 是多少錢。請確認是否有其他相關資訊，或直接聯絡我們的客服人員以獲得最準確的答案。,3.69

@@ -81,13 +81,13 @@ def parse_aorus_comparison(url):
             bottom_footnotes.append(f"* {seg}")
     
     with open("data/warning_context.txt", "w", encoding="utf-8") as f:
-        f.write("【系統應答守則：規格特定免責聲明】\n")
-        f.write("當你回答以下特定硬體項目時，請務必參考括號內的原廠說明進行回覆：\n")
+        f.write("[SPECIFIC HARDWARE DISCLAIMERS]\n")
+        f.write("Reference the following disclaimers ONLY if the specific hardware is mentioned in the question:\n")
         
         for disc in sorted(list(extracted_disclaimers)):
             f.write(f"- {disc}\n")
             
-        f.write("\n【通用免責聲明】\n")
+        f.write("\n[GENERAL DISCLAIMERS]\n")
         for note in bottom_footnotes:
             if note:
                 f.write(f"- {note}\n")

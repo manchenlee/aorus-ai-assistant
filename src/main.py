@@ -34,7 +34,7 @@ class AORUSChatbot:
         related_chunks = self.retriever.retrieve(user_query, k=4)
         context_text = "\n".join(related_chunks)
 
-        print(f"\n[Debug] Chunk catch:\n{context_text}\n")
+        #print(f"\n[Debug] Chunk catch:\n{context_text}\n")
 
         # B. 組合雙語支援的 System Prompt
         system_prompt = f"""You are a professional, helpful, and human-like AORUS customer support assistant.
@@ -42,26 +42,21 @@ Answer the user's question based ONLY on the <Knowledge_Base> below.
 
 <Knowledge_Base>
 {context_text}
-
-[Official Disclaimers]:
 {self.sys_context}
 </Knowledge_Base>
 """
 
-        user_query = f"""{user_query}
-
-You MUST strictly adhere to the following output format (extract data to draft first, then answer):
-
+        user_query = f"""[User Query] 
+        {user_query}
+[INSTRUCTION]
+Please strictly adhere to the following output format (Extract data to draft first, then answer).
 <Draft>
-(Extract ONLY the specification data directly relevant to the question.)
+(Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 5 LINES. If the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.)
 </Draft>
 <Answer>
-(Provide the final answer in a natural, conversational tone based ONLY on your Draft. If the Draft says "No Data", politely reply that this information is not provided in the hardware specifications.)
+(Provide a natural, conversational response in Traditional Chinese (zh-TW). If the Draft says "No Data", politely state that the specifications do not provide this information.)
 </Answer>
-
-CRITICAL RULES:
-1. Language Matching: You MUST write the <Answer> in the EXACT SAME LANGUAGE as the user's query. (English to English, Traditional Chinese (zh-TW) to Traditional Chinese (zh-TW)).
-2. Disclaimers: If the question is about "Weight", "Dimensions", "GPU/Graphics" or "Storage", explicitly mention the relevant disclaimer gracefully at the end of your <Answer>.
+You MUST write the <Answer> in the EXACT SAME LANGUAGE as [User Query]. (English to English, Traditional Chinese (zh-TW) to Traditional Chinese (zh-TW)).
 """
         # C. 使用 llama.cpp 的 create_chat_completion (支援 Chat Template)
         response = self.llm.create_chat_completion(
