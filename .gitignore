@@ -1,0 +1,14 @@
+# Python 虛擬環境
+.venv/
+__pycache__/
+*.pyc
+
+# 模型檔案
+models/
+*.gguf
+
+# 環境變數與秘密資訊
+.env
+
+# uv 相關快取
+.uv
