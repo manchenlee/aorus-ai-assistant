@@ -1,0 +1,15 @@
+【系統應答守則：規格特定免責聲明】
+當你回答以下特定硬體項目時，請務必參考括號內的原廠說明進行回覆：
+- 儲存裝置: *The storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information.; **If there is any abnormality that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. More info:; https://member.aorus.com/global/productwarranty
+- 尺寸: *The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
+- 重量: *The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
+- 顯示晶片: *May vary by scenario
+
+【通用免責聲明】
+- * HDMI、HDMI High-Definition Multimedia Interface、HDMI 商業外觀及 HDMI 識別標章等詞彙均為 HDMI Licensing Administrator, Inc. 的商標或註冊商標。
+- * 1升級時機會依裝置而有所不同。功能和應用程式可用性會依地區而有所不同。某些功能需要特定硬體 (請參閱https://www.microsoft.com/zh-tw/windows/windows-11-specifications)。
+- * 產品規格會依各國家地區出貨而有所變動，應以各地實際出貨狀況為準。誠摯建議與當地經銷商或零售商確認最新產品販售規格。
+- * 以上產品之規格、圖片及其他資訊僅供參考，如與實際產品有任何不相符之處，應以實際產品為準。技嘉科技保留在任何時間做出修改之權利。對任何因使用上述資料而引致之損失，技嘉科技概不承擔任何責任。
+- * 本產品所標示之各項效能表現為各晶片廠商或各制定介面官方組織所提出的最大理論值，實際效能可能因規格及設備而有所不同。
+- * 本文中所使用之各項商標及企業識別圖示，均為其合法所有人之財產。
+- * 基於PC基本架構，有部分記憶體空間須留作系統用途，故所偵測到之記憶體大小會比實際上較少。
