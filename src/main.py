@@ -22,7 +22,7 @@ class AORUSChatbot:
         self.sys_context = self._load_system_context()
 
     def _load_system_context(self):
-        file_path = "data/warning_context.txt"
+        file_path = "data/rag/warning_context.txt"
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 return f.read()
