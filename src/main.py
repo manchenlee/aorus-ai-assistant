@@ -43,14 +43,16 @@ class AORUSAssistant:
                 "name": "Traditional Chinese (繁體中文)",
                 "start_info": "根據規格，",
                 "start_none": "很抱歉，",
-                "start_norm": "關於"
+                "start_norm": "關於",
+                "knowledge_base": "知識庫"
             }
         else:
             L = {
                 "name": "English",
                 "start_info": "Based on the specifications,",
                 "start_none": "I'm Sorry,",
-                "start_norm": "About"
+                "start_norm": "About",
+                "knowledge_base": "knowledge base"
             }
         # B. 組合 Prompt
         system_prompt = f"""You are a professional, helpful, and human-like AORUS customer support assistant.
@@ -74,13 +76,13 @@ Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinf
 
         user_query_prompt = f"""[User Query] 
         {user_query}
-[STRICT INSTRUCTION]
+[INSTRUCTION]
 In <Draft>, if the [User Query]'s statement is WRONG, list it in <Draft> as 'CORRECTION: [Fact]'.
 In <Answer>:
 - Answer MUST be in {L['name']}.
-- If Draft has 'CORRECTION', Answer MUST start with '{L['start_info']}[Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
-- If No Data, Answer MUST start with '{L['start_none']}' and MUST STOP responding after stating there is no info in the Knowledge Base.
-- OTHERWISE: Start with "{L['start_norm']} [Product or specifications the user ask]..." and MUST STOP responding after providing info in the Knowledge Base.
+- If Draft has 'CORRECTION': Answer MUST start with '{L['start_info']}[Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
+- IF Draft has 'No Data': Answer MUST start with '{L['start_none']}' and MUST STOP responding after stating there is no info in the knowledge base.
+- OTHERWISE: Answer MUST start with "{L['start_norm']} [Subject]..." and MUST STOP responding after providing info in the knowledge base.
 Please strictly adhere to the following output format (Extract data to draft first, then answer, NEVER echo user errors).
 <Draft>
 (Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 5 LINES. If the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.)
