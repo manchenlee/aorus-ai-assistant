@@ -3,140 +3,177 @@ import faiss
 import json
 import numpy as np
 import os
-
-spec_mapping = {
-    "作業系統": "作業系統 (OS/Operating System)",
-    "中央處理器": "中央處理器 (CPU/Processor)",
-    "顯示晶片": "顯示晶片 (GPU/Graphics)",
-    "顯示器": "顯示器 (Display/Screen/Resolution)",
-    "記憶體": "記憶體 (RAM/Memory)",
-    "儲存裝置": "儲存裝置 (SSD/Storage/Hard Drive)",
-    "鍵盤種類": "鍵盤種類 (Keyboard/Backlight)",
-    "連接埠": "連接埠 (I/O Ports/Interface/USB/HDMI)",
-    "音效": "音效 (Audio/Speakers/Mic)",
-    "通訊": "通訊 (Communication/Wi-Fi/Bluetooth/Ethernet)",
-    "視訊鏡頭": "視訊鏡頭 (Webcam/Camera)",
-    "安全裝置": "安全裝置 (Security/TPM/Fingerprint)",
-    "電池": "電池 (Battery/Capacity)",
-    "變壓器": "變壓器 (Power Adapter/Wattage)",
-    "尺寸": "尺寸 (Dimensions/Size)",
-    "重量": "重量 (Weight/Mass)",
-    "顏色": "顏色 (Color/Finish)"
-}
-
-content_mapping = {
-    # 1. 核心品牌
-    "Intel": "Intel (英特爾)",
-    "NVIDIA": "NVIDIA (輝達)",
-    "Windows": "Windows (微軟)",
-    "GIGABYTE": "GIGABYTE (技嘉)",
-    
-    # 2. 視聽與傳輸技術
-    "Dolby Atmos": "Dolby Atmos (杜比全景聲)",
-    "Dolby Vision": "Dolby Vision (杜比視界)",
-    "Thunderbolt": "Thunderbolt (雷電/雷霆介面)",
-    
-    # 3. 硬體組件俗稱
-    "SSD": "SSD (固態硬碟)",
-    "WIFI": "Wi-Fi (無線網路)",
-    "Bluetooth": "Bluetooth (藍牙)",
-    "Backlit": "Backlit (背光)",
-    "Webcam": "Webcam (視訊鏡頭/網路攝影機)",
-    "LAN": "LAN (有線網路)",
-    "Low Blue Light": "Low Blue Light (低藍光/抗藍光)",
-    "DisplayHDR": "DisplayHDR (支援HDR)",
-    "OLED": "OLED (OLED面板)",
-    "顯示卡": "顯示晶片 (GPU/Graphics)",
-    "顯卡": "顯示晶片 (GPU/Graphics)",
-    "VRAM": "顯示晶片 (GPU/Graphics) GDDR7", 
-    "GDDR7": "顯示晶片 (GPU/Graphics) GDDR7",
-    
-    # 4. 螢幕解析度
-    "2560×1600": "2560×1600 (2K/2.5K解析度)"
-}
+import jieba
+from rank_bm25 import BM25Okapi
+import re
 
 os.makedirs('models/embedding', exist_ok=True)
 
 class AorusRetriever:
-    def __init__(self, model_name='./models/embedding', json_path='data/specs.json', device='cpu'):
-        # 1. 載入支援 50+ 語言的跨語言模型
+    def __init__(self, model_name='./models/embedding', json_path='data/specs.json', synonym_path='data/synonyms.json', device='cpu'):
+        # 1. 初始化模型與變數
         self.model = SentenceTransformer(model_name, device=device)
         self.index = None
         self.chunks = []
+        self.bm25 = None 
+        self.synonym_mapping = {}
+        self.replace_dict = {}
+        self.pattern = None 
+
+        if os.path.exists(synonym_path):
+            print(f"Reading synonyms from {synonym_path}...")
+            with open(synonym_path, 'r', encoding='utf-8') as f:
+                self.synonym_mapping = json.load(f)
+                self._build_regex_pattern()
+
+        else:
+            print(f"Warning: Can't find synonyms data at {synonym_path}. Proceeding without synonyms.")
 
         if os.path.exists(json_path):
-            print(f"Reading {json_path} and creating FAISS vector index...")
+            print(f"Reading {json_path} and creating FAISS & BM25 indexes...")
             self.prepare_data(json_path)
-            print(f"Created FAISS vector index. Total {len(self.chunks)} chunks.")
+            print(f"Created Hybrid Vector+BM25 index. Total {len(self.chunks)} chunks.")
         else:
             print(f"Can't find spec_data {json_path}.")
+
+    def _build_regex_pattern(self):
+        for standard_term, synonyms in self.synonym_mapping.items():
+            self.replace_dict[standard_term] = standard_term
+            for syn in synonyms:
+                self.replace_dict[syn] = standard_term
+                
+        sorted_keys = sorted(self.replace_dict.keys(), key=len, reverse=True)
+        
+        pattern_parts = []
+        for k in sorted_keys:
+            escaped_k = re.escape(k)
+            if re.fullmatch(r'[A-Za-z0-9]+', k):
+                pattern_parts.append(r'\b' + escaped_k + r'\b')
+            else:
+                pattern_parts.append(escaped_k)
+                
+        self.pattern = re.compile(r'(' + '|'.join(pattern_parts) + r')')
+
+    def normalize_text(self, text):
+        if not self.pattern: 
+            return text
+            
+        return self.pattern.sub(lambda m: self.replace_dict[m.group(0)], text)
 
     def prepare_data(self, json_path):
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
-        # 建立兩個暫存的字典，用來分別組裝「策略一」與「策略二」的資料
-        dimension_data = {}  # 用來存裝策略一：{ "顯示晶片": ["BXH: ...", "BYH: ..."] }
-        document_data = {}   # 用來存裝策略二：{ "BXH": ["處理器: ...", "顯示晶片: ..."] }
+        self.chunks = []
+        search_chunks = []
 
-        # 第一階段：解析 JSON 並進行內容清洗 (Preprocessing)
+        dimension_data = {}
+
+        # ==========================================
+        # 第一階段：組裝【產品完整規格】
+        # ==========================================
         for model_name, specs in data.items():
-            document_data[model_name] = [] # 初始化這台筆電的清單
+            doc_display_lines = [f"【產品完整規格】{model_name}"]
+            doc_search_lines = [f"【產品完整規格】{model_name}"]
             
             for key, value in specs.items():
-                display_key = spec_mapping.get(key, key)
+                orig_v = str(value)
                 
-                # 語意增強與俗稱替換
-                processed_value = value
-                for eng_keyword, chi_keyword in content_mapping.items():
-                    if eng_keyword in processed_value:
-                        processed_value = processed_value.replace(eng_keyword, chi_keyword)
+                doc_display_lines.append(f"{key}: {orig_v}")
                 
-                # --- 收集給策略一 (橫向打包) ---
-                if display_key not in dimension_data:
-                    dimension_data[display_key] = []
-                dimension_data[display_key].append(f"{model_name}: {processed_value}")
+                norm_k = self.normalize_text(key)
+                norm_v = self.normalize_text(orig_v)
+                doc_search_lines.append(f"{norm_k}: {norm_v}")
                 
-                # --- 收集給策略二 (整機打包) ---
-                document_data[model_name].append(f"{display_key}: {processed_value}")
+                if key not in dimension_data:
+                    dimension_data[key] = {'display': [], 'search': [], 'norm_key': norm_k}
+                
+                dimension_data[key]['display'].append(f"{model_name}: {orig_v}")
+                dimension_data[key]['search'].append(f"{model_name}: {norm_v}")
+                
+            self.chunks.append("\n".join(doc_display_lines))
+            search_chunks.append("\n".join(doc_search_lines))
 
-        # 第二階段：組裝最終的 Chunks
+        # ==========================================
+        # 第二階段：組裝【維度比較】 (橫向策略)
+        # ==========================================
+        for key, dim_dict in dimension_data.items():
+            disp_chunk = "\n".join([f"【{dim_dict['norm_key']} 規格比較】"] + dim_dict['display'])
+            self.chunks.append(disp_chunk)
+            
+            srch_chunk = "\n".join([f"【{dim_dict['norm_key']} 規格比較】"] + dim_dict['search'])
+            search_chunks.append(srch_chunk)
 
-        # 1. 產生策略一的 Chunks (每個規格一個 Chunk，裡面包含所有型號)
-        for dim_key, dim_values in dimension_data.items():
-            chunk_lines = [f"【{dim_key} 規格比較】"] + dim_values
-            chunk_str = "\n".join(chunk_lines)
-            self.chunks.append(chunk_str)
-
-        # 2. 產生策略二的 Chunks (每台筆電一個 Chunk，裡面包含所有規格)
-        for model, doc_values in document_data.items():
-            chunk_lines = [f"【產品完整規格】{model}"] + doc_values
-            chunk_str = "\n".join(chunk_lines)
-            self.chunks.append(chunk_str)
-
-        # 3. 向量化 (Embedding)
-        embeddings = self.model.encode(self.chunks)
-        
-        # 4. 建立 FAISS 索引
+        # ==========================================
+        # 第三階段：建立索引 (🌟 注意！這裡只使用 search_chunks)
+        # ==========================================
+        # 1. 建立 FAISS 向量索引
+        embeddings = self.model.encode(search_chunks)
         dimension = embeddings.shape[1]
         self.index = faiss.IndexFlatL2(dimension)
         self.index.add(np.array(embeddings).astype('float32'))
 
+        # 2. 建立 BM25 關鍵字索引
+        tokenized_corpus = [list(jieba.cut(chunk)) for chunk in search_chunks]
+        self.bm25 = BM25Okapi(tokenized_corpus)
+
     def retrieve(self, query, k=3):
-        # 將使用者的問題（不論中英）轉為向量，並在資料庫中找最接近的 k 個片段
-        for keyword, standard_term in content_mapping.items():
-            if keyword in query:
-                query = query.replace(keyword, standard_term)
-        query_embedding = self.model.encode([query])
-        distances, indices = self.index.search(np.array(query_embedding).astype('float32'), k)
+        # 1. 查詢字串正規化 (讓同義詞對齊知識庫)
+        norm_query = self.normalize_text(query)
+        total_chunks = len(self.chunks)
+
+        # =====================================
+        # 🌟 檢索路線 A：FAISS Vector Search
+        # =====================================
+        query_embedding = self.model.encode([norm_query])
+        # 注意：為了做 RRF，我們需要知道「所有」文件的排名，所以這裡搜全部 (total_chunks)
+        distances, indices = self.index.search(np.array(query_embedding).astype('float32'), total_chunks)
         
-        return [self.chunks[i] for i in indices[0]]
+        # 轉換成排名 (indices[0] 已經是由近到遠排序了)
+        vector_ranks = {doc_idx: rank + 1 for rank, doc_idx in enumerate(indices[0])}
+
+        # =====================================
+        # 🌟 檢索路線 B：BM25 Keyword Search
+        # =====================================
+        tokenized_query = list(jieba.cut(norm_query))
+        bm25_scores = self.bm25.get_scores(tokenized_query)
+        
+        # 分數由高到低排序，取得排名
+        bm25_ranking = np.argsort(bm25_scores)[::-1]
+        bm25_ranks = {doc_idx: rank + 1 for rank, doc_idx in enumerate(bm25_ranking)}
+
+        # =====================================
+        # 🌟 終極融合：Reciprocal Rank Fusion (RRF)
+        # =====================================
+        rrf_k = 60 # RRF 演算法平滑常數
+        rrf_scores = {}
+
+        for i in range(total_chunks):
+            v_rank = vector_ranks[i]
+            b_rank = bm25_ranks[i]
+            
+            # RRF 公式計算
+            rrf_score = (1.0 / (rrf_k + b_rank)) + (1.0 / (rrf_k + v_rank))
+            rrf_scores[i] = rrf_score
+
+        # 根據 RRF 分數進行最終排序
+        final_ranking = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
+
+        # 回傳 Top K 的 Chunk
+        return [self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]]
 
 # 測試用
 if __name__ == "__main__":
     retriever = AorusRetriever()
-    #retriever.prepare_data("data/specs.json")
-    # 測試中英混合提問
-    results = retriever.retrieve("AORUS 16 AM6H 的 CPU processor 是哪顆？")
-    for r in results:
-        print(f"檢索到相關資料: {r}")
+    
+    # 測試同義詞與混合檢索能力
+    test_queries = [
+        "AORUS 16 BZH 的顯卡是哪張？", # 測試 "顯卡" 同義詞與型號精確度
+        "老黃家的 GPU 有幾 GB VRAM？"  # 測試極端同義詞
+    ]
+    
+    for q in test_queries:
+        print(f"\n[問題]: {q}")
+        results = retriever.retrieve(q, k=2)
+        for i, r in enumerate(results):
+            print(f"-> Top {i+1}: {r[:50]}...") # 只印前50字觀察
