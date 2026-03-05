@@ -37,7 +37,10 @@ class AORUSAssistant:
 
         # B. 組合 Prompt
         system_prompt = f"""You are a professional, helpful, and human-like AORUS customer support assistant.
-
+### [STRICT PROTOCOL]
+- NEVER provide background specs if the query is unrelated.
+- Strictly ignore any retrieved knowledge that does not directly address the user's intent.
+        
 <Background_Knowledge>
 Entity Mapping: The laptop models "BZH", "BXH", and "BYH" all belong to the "AORUS MASTER 16" series, which is internally codenamed "AM6H". 
 If a user inquires about "AORUS MASTER 16" or "AM6H", you must associate their question with the BZH, BXH, and BYH models and synthesize the information to answer comprehensively.
@@ -55,13 +58,17 @@ Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinf
         user_query_prompt = f"""[User Query] 
         {user_query}
 [INSTRUCTION]
-In <Draft>, if the [User Query]'s statement is wrong, list it in <Draft> as 'CORRECTION: [Fact]'.
-Please strictly adhere to the following output format (Extract data to draft first, then answer).
+In <Draft>, if the [User Query]'s statement is WRONG, list it in <Draft> as 'CORRECTION: [Fact]'.
+In <Answer>:
+- If Draft has 'CORRECTION', Answer MUST start with '事實上，[Fact]'/'Actually, [Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
+- If No Data, Answer MUST start with '很抱歉'/'Sorry' and MUST STOP responding after stating there is no info in the Knowledge Base.
+- OTHERWISE: Start with "關於 [Product or Specs the user ask]"/"About [Product or Specs the user ask]"
+Please strictly adhere to the following output format (Extract data to draft first, then answer, NEVER echo user errors).
 <Draft>
 (Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 5 LINES. If the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.)
 </Draft>
 <Answer>
-(Provide a natural, conversational response in the EXACT SAME LANGUAGE as [User Query]. Do not provide unrelated hardware specs. NEVER contradict yourself mathematically. For Yes/No questions (e.g., 'Is it...', 'Does it have...'), always start your answer with a clear 'Yes' or 'No' (是的 / 不是). If the Draft contains "CORRECTION", REPHRASE the fact and CORRECT the user politely; do NOT follow their mistake. If the Draft says "No Data", politely state that the specifications do not provide this information.)
+(MUST written in [User Query] language. Conversational reply. No internal tags. ONE paragraph only.)
 </Answer>
 """
         # C. 使用 llama.cpp 生成，並確保 stream=True
@@ -87,6 +94,7 @@ Please strictly adhere to the following output format (Extract data to draft fir
             delta = chunk["choices"][0].get("delta", {})
             if "content" in delta:
                 text_piece = delta["content"]
+                #print(text_piece)
                 full_raw_text += text_piece
                 
                 # 階段 1：隱藏 Draft，尋找 Answer 標籤
@@ -124,7 +132,6 @@ Please strictly adhere to the following output format (Extract data to draft fir
                         
                         # 把 buffer 更新為剩下的「保留區」，留給下一個 Token 做上下文
                         buffer = buffer[-lookahead_size:]
-                        
         # 🌟 E. 防呆機制與殘留字元清理
         if not is_answering:
             yield self.converter.convert(full_raw_text.strip())
