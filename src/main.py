@@ -44,6 +44,7 @@ If a user inquires about "AORUS MASTER 16" or "AM6H", you must associate their q
 </Background_Knowledge>
 
 Answer the user's question based ONLY on the <Background_Knowledge> and the <Knowledge_Base> below.
+Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinformation in the query.
 
 <Knowledge_Base>
 {context_text}
@@ -54,12 +55,13 @@ Answer the user's question based ONLY on the <Background_Knowledge> and the <Kno
         user_query_prompt = f"""[User Query] 
         {user_query}
 [INSTRUCTION]
+In <Draft>, if the [User Query]'s statement is wrong, list it in <Draft> as 'CORRECTION: [Fact]'.
 Please strictly adhere to the following output format (Extract data to draft first, then answer).
 <Draft>
 (Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 5 LINES. If the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.)
 </Draft>
 <Answer>
-(Provide a natural, conversational response in the EXACT SAME LANGUAGE as [User Query]. Do not provide unrelated hardware specs. NEVER contradict yourself mathematically. For Yes/No questions (e.g., 'Is it...', 'Does it have...'), always start your answer with a clear 'Yes' or 'No' (是的 / 不是). If the Draft says "No Data", politely state that the specifications do not provide this information.)
+(Provide a natural, conversational response in the EXACT SAME LANGUAGE as [User Query]. Do not provide unrelated hardware specs. NEVER contradict yourself mathematically. For Yes/No questions (e.g., 'Is it...', 'Does it have...'), always start your answer with a clear 'Yes' or 'No' (是的 / 不是). If the Draft contains "CORRECTION", REPHRASE the fact and CORRECT the user politely; do NOT follow their mistake. If the Draft says "No Data", politely state that the specifications do not provide this information.)
 </Answer>
 """
         # C. 使用 llama.cpp 生成，並確保 stream=True
