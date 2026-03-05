@@ -81,7 +81,7 @@ def parse_aorus_comparison(url):
         for seg in segments:
             bottom_footnotes.append(f"* {seg}")
     
-    with open(os.path.join(Config.RAG_DATA_PATH,"warning_context.txt"), "w", encoding="utf-8") as f:
+    with open(os.path.join(Config.RAG_DATA_PATH,"disclaimers.txt"), "w", encoding="utf-8") as f:
         f.write("[SPECIFIC HARDWARE DISCLAIMERS]\n")
         f.write("Reference the following disclaimers ONLY if the specific hardware is mentioned in the question:\n")
         
@@ -93,7 +93,7 @@ def parse_aorus_comparison(url):
             if note:
                 f.write(f"- {note}\n")
     
-    print(f"Output {Config.RAG_DATA_PATH}/warning_context.txt")
+    print(f"Output {Config.RAG_DATA_PATH}/disclaimers.txt")
 
     return final_data
 

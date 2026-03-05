@@ -4,7 +4,7 @@ from llama_cpp import Llama
 from src.retriever import AorusRetriever
 from config import Config
 
-class AORUSChatbot:
+class AORUSAssistant:
     def __init__(self, model_path=Config.REASONING_MODEL_FILE):
         # 1. 初始化 Retriever
         self.retriever = AorusRetriever()
@@ -23,7 +23,7 @@ class AORUSChatbot:
         self.sys_context = self._load_system_context()
 
     def _load_system_context(self):
-        file_path = os.path.join(Config.RAG_DATA_PATH, "warning_context.txt")
+        file_path = os.path.join(Config.RAG_DATA_PATH, "disclaimers.txt")
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 return f.read()
@@ -37,7 +37,13 @@ class AORUSChatbot:
 
         # B. 組合 Prompt
         system_prompt = f"""You are a professional, helpful, and human-like AORUS customer support assistant.
-Answer the user's question based ONLY on the <Knowledge_Base> below.
+
+<Background_Knowledge>
+Entity Mapping: The laptop models "BZH", "BXH", and "BYH" all belong to the "AORUS MASTER 16" series, which is internally codenamed "AM6H". 
+If a user inquires about "AORUS MASTER 16" or "AM6H", you must associate their question with the BZH, BXH, and BYH models and synthesize the information to answer comprehensively.
+</Background_Knowledge>
+
+Answer the user's question based ONLY on the <Background_Knowledge> and the <Knowledge_Base> below.
 
 <Knowledge_Base>
 {context_text}
@@ -126,7 +132,7 @@ Please strictly adhere to the following output format (Extract data to draft fir
 
 # --- 單機簡單測試區 ---
 if __name__ == "__main__":
-    bot = AORUSChatbot()
+    bot = AORUSAssistant()
     print("\n✅ AORUS AI Assistant is Online! (type \'exit\' to exit.)")
     while True:
         query = input("\n[User]: ")

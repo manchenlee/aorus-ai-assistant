@@ -21,6 +21,8 @@ class Config:
     RAG_DATA_PATH = os.getenv("RAG_DATA_PATH", "./data/rag")
     TEST_DATA_PATH = os.getenv("TEST_DATA_PATH", "./data/test")
 
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
     # ==========================================
     # ⚙️ Model Config (模型生成參數)
     # ==========================================
