@@ -1,10 +1,11 @@
 import os
 import opencc
 from llama_cpp import Llama
-from retriever import AorusRetriever
+from src.retriever import AorusRetriever
+from config import Config
 
 class AORUSChatbot:
-    def __init__(self, model_path="models/qwen2.5-3b/qwen2.5-3b-instruct-q4_k_m.gguf"):
+    def __init__(self, model_path=Config.REASONING_MODEL_FILE):
         # 1. 初始化 Retriever
         self.retriever = AorusRetriever()
         self.converter = opencc.OpenCC('s2twp')
@@ -22,7 +23,7 @@ class AORUSChatbot:
         self.sys_context = self._load_system_context()
 
     def _load_system_context(self):
-        file_path = "data/rag/warning_context.txt"
+        file_path = os.path.join(Config.RAG_DATA_PATH, "warning_context.txt")
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 return f.read()
@@ -61,8 +62,8 @@ Please strictly adhere to the following output format (Extract data to draft fir
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_query_prompt}
             ],
-            temperature=0.1,
-            max_tokens=1024,
+            temperature=Config.TEMPERATURE,
+            max_tokens=Config.MAX_TOKENS,
             stream=True
         )
         # 🌟 D. 狀態機與滑動視窗初始化
@@ -71,8 +72,8 @@ Please strictly adhere to the following output format (Extract data to draft fir
         buffer = ""
         
         # 滑動視窗參數：你可以自己微調這兩個數字來感受打字速度
-        window_size = 8      # 當籃子累積到幾個字時，觸發輸出
-        lookahead_size = 4   # 每次輸出時，強制把最後幾個字「扣留」下來當作下次的上下文
+        window_size = Config.WINDOW_SIZE      # 當籃子累積到幾個字時，觸發輸出
+        lookahead_size = Config.LOOKAHEAD_SIZE   # 每次輸出時，強制把最後幾個字「扣留」下來當作下次的上下文
 
         for chunk in response_stream:
             delta = chunk["choices"][0].get("delta", {})

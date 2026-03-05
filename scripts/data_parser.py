@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+from config import Config
 
 extracted_disclaimers = set()
 
@@ -32,8 +33,8 @@ def clean_spec_value(val, title):
     return '; '.join(kept_parts)
 
 def parse_aorus_comparison(url):
-    os.makedirs('data/rag', exist_ok=True)
-    os.makedirs('data/test', exist_ok=True)
+    os.makedirs(Config.RAG_DATA_PATH, exist_ok=True)
+    os.makedirs(Config.TEST_DATA_PATH, exist_ok=True)
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     res = requests.get(url, headers=headers)
     res.encoding = 'utf-8'
@@ -80,7 +81,7 @@ def parse_aorus_comparison(url):
         for seg in segments:
             bottom_footnotes.append(f"* {seg}")
     
-    with open("data/rag/warning_context.txt", "w", encoding="utf-8") as f:
+    with open(os.path.join(Config.RAG_DATA_PATH,"warning_context.txt"), "w", encoding="utf-8") as f:
         f.write("[SPECIFIC HARDWARE DISCLAIMERS]\n")
         f.write("Reference the following disclaimers ONLY if the specific hardware is mentioned in the question:\n")
         
@@ -91,13 +92,13 @@ def parse_aorus_comparison(url):
         for note in bottom_footnotes:
             if note:
                 f.write(f"- {note}\n")
-
-    print("Output data/rag/warning_context.txt")
+    
+    print(f"Output {Config.RAG_DATA_PATH}/warning_context.txt")
 
     return final_data
 
 # 執行並儲存
 url = "https://www.gigabyte.com/tw/Laptop/AORUS-MASTER-16-AM6H/sp"
 data = parse_aorus_comparison(url)
-with open("data/rag/specs.json", "w", encoding="utf-8") as f:
+with open(os.path.join(Config.RAG_DATA_PATH,"specs.json"), "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4)

@@ -6,11 +6,15 @@ import os
 import jieba
 from rank_bm25 import BM25Okapi
 import re
+from config import Config
 
-os.makedirs('models/embedding', exist_ok=True)
+os.makedirs(Config.EMBEDDING_MODEL_PATH, exist_ok=True)
+
+JSON_PATH = os.path.join(Config.RAG_DATA_PATH,"specs.json")
+SYNONYM_PATH = os.path.join(Config.RAG_DATA_PATH,"synonyms.json")
 
 class AorusRetriever:
-    def __init__(self, model_name='./models/embedding', json_path='data/rag/specs.json', synonym_path='data/rag/synonyms.json', device='cpu'):
+    def __init__(self, model_name=Config.EMBEDDING_MODEL_PATH, json_path=JSON_PATH, synonym_path=SYNONYM_PATH, device='cpu'):
         # 1. 初始化模型與變數
         self.model = SentenceTransformer(model_name, device=device)
         self.index = None
