@@ -80,7 +80,7 @@ In <Answer>:
 - Answer MUST be in {L['name']}.
 - If Draft has 'CORRECTION', Answer MUST start with '{L['start_info']}[Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
 - If No Data, Answer MUST start with '{L['start_none']}' and MUST STOP responding after stating there is no info in the Knowledge Base.
-- OTHERWISE: Start with "{L['start_norm']} [Product or specifications the user ask]..."
+- OTHERWISE: Start with "{L['start_norm']} [Product or specifications the user ask]..." and MUST STOP responding after providing info in the Knowledge Base.
 Please strictly adhere to the following output format (Extract data to draft first, then answer, NEVER echo user errors).
 <Draft>
 (Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 5 LINES. If the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.)
