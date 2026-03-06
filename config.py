@@ -16,6 +16,11 @@ class Config:
     # 嵌入模型 (Embedding Model)
     EMBEDDING_MODEL_PATH = os.getenv("EMBEDDING_MODEL_PATH", "./models/embedding/")
     EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "paraphrase-multilingual-MiniLM-L12-v2")
+
+    # 評審模型
+    JUDGE_MODEL_REPO_ID = os.getenv("JUDGE_MODEL_REPO_ID", "divish/M-Prometheus-7B-Q4_K_M-GGUF")
+    JUDGE_MODEL_FILE = os.getenv("JUDGE_MODEL_FILE", "./models/judge/M-Prometheus-7B-Q4_K_M.gguf")
+    JUDGE_MODEL_PATH = os.getenv("JUDGE_MODEL_PATH", "./models/judge/")
     
     # 專案資料路徑 (Data Paths)
     RAG_DATA_PATH = os.getenv("RAG_DATA_PATH", "./data/rag")

@@ -24,6 +24,7 @@ dependencies = [
     "trulens-eval>=2.7.0",
     "trulens>=2.7.0",
     "trulens-providers-google>=2.7.0",
+    "openpyxl>=3.1.5",
 ]
 
 [[tool.uv.index]]

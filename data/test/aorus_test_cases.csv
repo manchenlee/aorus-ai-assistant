@@ -1,101 +1,101 @@
 ﻿ID,Category,Language,Question,Expected_Answer
-1,What (Fact Extraction),純中文,AORUS MASTER 16 BZH 的電池容量是幾瓦時？,AORUS MASTER 16 BZH 的電池容量為 99Wh。
+1,What (Fact Extraction),純中文,AORUS MASTER 16 BZH 的顯示晶片型號是什麼？,AORUS MASTER 16 BZH 配備 NVIDIA® GeForce RTX™ 5090 Laptop GPU。
 2,What (Fact Extraction),純英文,What is the maximum RAM capacity for the AM6H series?,The AM6H series supports up to 64GB DDR5 5600MHz RAM.
-3,What (Fact Extraction),中英混合,這台 AORUS MASTER 16 BYH 的顯示卡 VRAM 給到幾 G？,AORUS MASTER 16 BYH 的顯示晶片配備 16GB GDDR7 記憶體。
-4,What (Fact Extraction),純中文,BXH 這台的螢幕刷新率是多少？,BXH 的螢幕刷新率為 240Hz。
-5,What (Fact Extraction),純英文,What is the peak brightness of the display on the AORUS MASTER 16 laptops?,The display on AORUS MASTER 16 laptops has a peak brightness of 500 nits.
-6,What (Fact Extraction),中英混合,這台 rig 的 CPU 是哪一顆？,這台 rig 的中央處理器是 Intel® Core™ Ultra 9 Processor 275HX。
-7,What (Fact Extraction),純中文,AORUS MASTER 16 BZH 的顯卡最大功耗是多少瓦？,AORUS MASTER 16 BZH 的顯示晶片最大功耗為 175W (含 Dynamic Boost)。
-8,What (Fact Extraction),純英文,Which Windows operating systems are supported on the AM6H series?,"The AM6H series supports Windows 11 Pro, Windows 11 Home, and UEFI Shell OS."
-9,What (Fact Extraction),中英混合,這台筆電有幾個 M.2 SSD slot 可以用？,這台筆電有 1 個 PCIe Gen5 M.2 slot 和 1 個 PCIe Gen4x4 M.2 slot。
-10,What (Fact Extraction),純中文,AORUS MASTER 16 BYH 的鍵盤是哪種背光？,AORUS MASTER 16 BYH 配備 3-zone RGB 背光鍵盤。
-11,What (Fact Extraction),純英文,What is the LAN speed of the AORUS MASTER 16 BXH?,The LAN speed for AORUS MASTER 16 BXH is 1G.
-12,What (Fact Extraction),中英混合,這台的藍牙版本是幾點幾？,這台的藍牙版本是 v5.4。
-13,What (Fact Extraction),純中文,AORUS MASTER 16 BZH 有支援哪種 Wi-Fi 標準？,AORUS MASTER 16 BZH 支援 WIFI 7 (802.11be 2x2)。
-14,What (Fact Extraction),純英文,What is the resolution of the webcam on the AORUS MASTER 16 laptops?,The webcam on AORUS MASTER 16 laptops is FHD (1080p) IR.
-15,What (Fact Extraction),中英混合,AORUS MASTER 16 系列的 Thunderbolt™5 port 有支援 Power Delivery 嗎？,是的，AORUS MASTER 16 系列的 Thunderbolt™5 port 支援 Power Delivery 3.0。
-16,What (Fact Extraction),純中文,這台筆電的音效有支援什麼技術？,這台筆電支援 Dolby Atmos® 和 Smart Amp Technology。
-17,What (Fact Extraction),純英文,What is the default color of the AORUS MASTER 16 series?,The default color of the AORUS MASTER 16 series is Dark Tide.
-18,What (Fact Extraction),中英混合,這台的螢幕是不是 OLED 的？,是的，這台的螢幕是 OLED WQXGA (2560×1600) 面板。
-19,What (Fact Extraction),純中文,AORUS MASTER 16 系列的記憶體頻率是多少？,AORUS MASTER 16 系列的記憶體頻率是 DDR5 5600MHz。
-20,What (Fact Extraction),純英文,What is the cache size of the Intel Core Ultra 9 Processor 275HX?,The Intel Core Ultra 9 Processor 275HX has a 36MB cache.
-21,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BZH 有支援 NVIDIA® G-SYNC® 對吧？,是的，AORUS MASTER 16 BZH 支援 NVIDIA® G-SYNC®。
-22,Yes/No (Positive Verification),純英文,Does the AORUS MASTER 16 BYH have a Thunderbolt™ 4 port?,"Yes, the AORUS MASTER 16 BYH has one Type-C port with Thunderbolt™ 4."
-23,Yes/No (Positive Verification),中英混合,這台 AM6H 的螢幕有 VESA DisplayHDR True Black 500 認證嗎？,是的，這台 AM6H 的螢幕有 VESA DisplayHDR True Black 500 認證。
-24,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BXH 支援 Windows Hello 臉部辨識嗎？,是的，AORUS MASTER 16 BXH 支援 Windows Hello 臉部辨識。
-25,Yes/No (Positive Verification),純英文,Can I expand the storage in the AORUS MASTER 16 series with a PCIe Gen5 M.2 SSD?,"Yes, the AORUS MASTER 16 series has one PCIe Gen5 M.2 slot."
-26,Yes/No (Positive Verification),中英混合,這台的鍵盤有 support N-Key 嗎？,是的，這台的鍵盤支援 N-Key。
-27,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BZH 附的變壓器是 330W 的嗎？,是的，AORUS MASTER 16 BZH 配備 330W AC Adapter。
-28,Yes/No (Positive Verification),純英文,Does the AM6H series come with Dolby Atmos® audio?,"Yes, the AM6H series features Dolby Atmos® audio."
-29,Yes/No (Positive Verification),中英混合,我可以用 Type-C port 幫 AORUS MASTER 16 充電嗎？,是的，其 Thunderbolt™5 和 Thunderbolt™4 Type-C port 都支援 Power Delivery 3.0。
-30,Yes/No (Positive Verification),純中文,AORUS MASTER 16 系列有內建麥克風嗎？,是的，AORUS MASTER 16 系列有內建陣列麥克風 (Build-in array Microphone)。
-31,Yes/No (Positive Verification),純英文,Is the display on the AORUS MASTER 16 BXH Pantone® Validated?,"Yes, the display on the AORUS MASTER 16 BXH is Pantone® Validated."
-32,Yes/No (Positive Verification),中英混合,這台有提供 MicroSD (UHS-II) reader 嗎？,是的，這台有提供一個 MicroSD (UHS-II) 讀卡機。
-33,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BYH 的顯示器有 1ms 反應時間嗎？,是的，AORUS MASTER 16 BYH 的顯示器有 1ms 反應時間。
-34,Yes/No (Positive Verification),純英文,Does the AORUS MASTER 16 series support Intel® Platform Trust Technology (Intel® PTT)?,"Yes, the AORUS MASTER 16 series supports Intel® Platform Trust Technology (Intel® PTT)."
-35,Yes/No (Positive Verification),中英混合,這台的螢幕有 TÜV Rheinland Low Blue Light 認證嗎？,是的，這台的螢幕有 TÜV Rheinland Low Blue Light 認證。
-36,Which (Comparison),純中文,AM6H 這幾台，哪一台的顯示晶片最頂？,AM6H 系列中，AORUS MASTER 16 BZH 配備 NVIDIA® GeForce RTX™ 5090 Laptop GPU，是顯示晶片最頂的型號。
-37,Which (Comparison),純英文,"Which model among BZH, BYH, and BXH has 12GB GDDR7 VRAM?",The AORUS MASTER 16 BXH has 12GB GDDR7 VRAM.
-38,Which (Comparison),中英混合,AM6H 系列中，哪幾台的顯卡 Max Graphics Power 是 175W？,AM6H 系列中，AORUS MASTER 16 BZH 和 AORUS MASTER 16 BYH 的顯示晶片最大功耗都是 175W。
-39,Which (Comparison),純中文,在 AORUS MASTER 16 系列裡，哪一台配備 RTX 5070 Ti？,AORUS MASTER 16 BXH 配備 NVIDIA® GeForce RTX™ 5070 Ti Laptop GPU。
-40,Which (Comparison),純英文,Which AORUS MASTER 16 model boasts a 5080 Laptop GPU?,The AORUS MASTER 16 BYH boasts an NVIDIA® GeForce RTX™ 5080 Laptop GPU.
-41,Which (Comparison),中英混合,AM6H 系列所有型號都用一樣的 CPU 嗎？,是的，AM6H 系列所有型號都使用 Intel® Core™ Ultra 9 Processor 275HX。
-42,Which (Comparison),純中文,BZH、BYH 和 BXH 這三台的螢幕規格有差異嗎？,"沒有，BZH、BYH 和 BXH 這三台的螢幕規格完全相同，皆為 16吋 OLED WQXGA (2560×1600) 240Hz, 1ms。"
-43,Which (Comparison),純英文,Which AORUS MASTER 16 model has the lowest AI Boost clock speed for its GPU?,"The AORUS MASTER 16 BZH has an AI Boost clock of 1797 MHz, which is the lowest among the three models (BYH: 1902 MHz, BXH: 1962 MHz)."
-44,Which (Comparison),中英混合,這幾台 AORUS MASTER 16 筆電，哪一台的顯卡 VRAM 最大？,AORUS MASTER 16 BZH 的顯示晶片擁有最大的 VRAM，為 24GB GDDR7。
-45,Which (Comparison),純中文,AORUS MASTER 16 系列所有型號都支援 WIFI 7 嗎？,是的，AORUS MASTER 16 系列所有型號都支援 WIFI 7 (802.11be 2x2)。
-46,Which (Comparison),純英文,Do all AORUS MASTER 16 models share the same battery capacity?,"Yes, all AORUS MASTER 16 models share the same 99Wh Li Polymer battery capacity."
-47,Which (Comparison),中英混合,AM6H 系列的 storage configuration 都一樣嗎？,是的，AM6H 系列的儲存裝置配置都一樣，包含 1x PCIe Gen5 M.2 slot 和 1x PCIe Gen4x4 M.2 slot。
-48,Which (Comparison),純中文,哪台 AORUS MASTER 16 的顯示晶片 TGP 是 140W？,AORUS MASTER 16 BXH 的顯示晶片最大功耗是 140W。
-49,Which (Comparison),純英文,"Are the I/O ports the same across all AORUS MASTER 16 (BZH, BYH, BXH) models?","Yes, the I/O ports are identical across all AORUS MASTER 16 (BZH, BYH, BXH) models."
-50,Which (Comparison),中英混合,AORUS MASTER 16 BZH 和 BYH 的顯卡 VRAM 差多少？,AORUS MASTER 16 BZH 的顯卡 VRAM 是 24GB GDDR7，而 BYH 是 16GB GDDR7，相差 8GB。
-51,Summarize (Summarization),純中文,請幫我列出 AM6H 系列的所有作業系統選項。,AM6H 系列的作業系統選項包括 Windows 11 Pro (GIGABYTE recommends Windows 11 Pro for business.)、Windows 11 Home 以及 UEFI Shell OS。
-52,Summarize (Summarization),純英文,List all the display features of the AORUS MASTER 16 BZH.,"The display features of the AORUS MASTER 16 BZH include 16"" 16:10 OLED WQXGA (2560×1600) 240Hz, 1ms, DCIP-3 100%, 500nits (peak), 1,000,000:1, NVIDIA® G-SYNC®, NVIDIA® Advanced Optimus, VESA DisplayHDR True Black 500, VESA ClearMR 10000, Pantone® Validated, TÜV Rheinland Low Blue Light, and Dolby Vision®."
-53,Summarize (Summarization),中英混合,這台 AORUS MASTER 16 的左右邊有提供哪些 ports？,"這台 AORUS MASTER 16 左側提供 1 個 DC in、1 個 RJ-45、1 個 HDMI 2.1、1 個 Type-A (USB3.2 Gen2) 和 1 個 Type-C with Thunderbolt™5 (支援 USB4, DisplayPort™ 2.1 和 Power Delivery 3.0)。右側則有 1 個 Type-A (USB3.2 Gen2)、1 個 Type-C with Thunderbolt™4 (支援 USB4, DisplayPort™ 1.4 和 Power Delivery 3.0)、1 個 MicroSD (UHS-II) 和 1 個 Audio Jack (支援 mic / headphone combo)。"
-54,Summarize (Summarization),純中文,請說明 AORUS MASTER 16 系列在音效方面的特色。,AORUS MASTER 16 系列在音效方面配備 4 個 2W 揚聲器、麥克風，並支援 Dolby Atmos® 和 Smart Amp Technology。
-55,Summarize (Summarization),純英文,What are the security features available on the AM6H laptops?,The AM6H laptops feature Firmware-based TPM and support Intel® Platform Trust Technology (Intel® PTT) for security.
-56,Summarize (Summarization),中英混合,AORUS MASTER 16 BYH 的 storage options 有哪些？,AORUS MASTER 16 BYH 的儲存選項包含 1 個 PCIe Gen5 M.2 slot 和 1 個 PCIe Gen4x4 M.2 slot，最高可支援 4TB PCIe NVMe™ M.2 SSD。
-57,Summarize (Summarization),純中文,請描述 AORUS MASTER 16 BXH 的鍵盤特色。,AORUS MASTER 16 BXH 配備 3-zone RGB 背光鍵盤，並提供最高 1.7mm 的鍵程，支援 N-Key。
-58,Summarize (Summarization),純英文,List the communication technologies used in the AORUS MASTER 16 series.,"The AORUS MASTER 16 series uses WIFI 7 (802.11be 2x2), LAN: 1G, and Bluetooth v5.4 for communication."
-59,Summarize (Summarization),中英混合,這台的螢幕有什麼視覺認證嗎？,這台的螢幕通過了 Pantone® Validated、TÜV Rheinland Low Blue Light、VESA DisplayHDR True Black 500 和 VESA ClearMR 10000 等認證。
-60,Summarize (Summarization),純中文,請列出 AORUS MASTER 16 系列的視訊鏡頭功能。,AORUS MASTER 16 系列的視訊鏡頭為 FHD (1080p) IR Webcam，內建陣列麥克風，並支援 Windows Hello 臉部辨識。
-61,Negative Yes/No (Negative Verification),純中文,這台 AORUS MASTER 16 BZH 的記憶體還是舊的 DDR4 嗎？,不，AORUS MASTER 16 BZH 使用的是 DDR5 5600MHz 記憶體。
-62,Negative Yes/No (Negative Verification),純英文,Does the AORUS MASTER 16 BYH only support Wi-Fi 6?,"No, the AORUS MASTER 16 BYH supports the newer WIFI 7 (802.11be 2x2) standard."
-63,Negative Yes/No (Negative Verification),中英混合,AORUS MASTER 16 BXH 的螢幕是 IPS 面板嗎？,不，AORUS MASTER 16 BXH 的螢幕是 OLED 面板。
-64,Negative Yes/No (Negative Verification),純中文,這台 AORUS MASTER 16 系列的 CPU 是 Intel i7 處理器嗎？,不，AORUS MASTER 16 系列配備的是 Intel® Core™ Ultra 9 Processor 275HX。
-65,Negative Yes/No (Negative Verification),純英文,Does the AORUS MASTER 16 BZH only have one M.2 slot for storage?,"No, the AORUS MASTER 16 BZH has two M.2 slots: one PCIe Gen5 and one PCIe Gen4x4."
-66,Negative Yes/No (Negative Verification),中英混合,AM6H 的 Thunderbolt port 沒有支援 Power Delivery 嗎？,不，AM6H 的 Thunderbolt™5 和 Thunderbolt™4 Type-C port 都支援 Power Delivery 3.0。
-67,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 BYH 的 HDMI 是 2.0 版本嗎？,不，AORUS MASTER 16 BYH 配備的是 HDMI 2.1 埠。
-68,Negative Yes/No (Negative Verification),純英文,Is the AORUS MASTER 16 BXH's webcam only 720p?,"No, the AORUS MASTER 16 BXH features an FHD (1080p) IR webcam."
-69,Negative Yes/No (Negative Verification),中英混合,這台的音效是不是只有雙聲道喇叭而已？,不，這台配備了 4 個 2W 揚聲器，並支援 Dolby Atmos® 和 Smart Amp Technology。
-70,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 BZH 的鍵盤是單區 RGB 背光嗎？,不，AORUS MASTER 16 BZH 配備的是 3-zone RGB 背光鍵盤。
-71,Negative Yes/No (Negative Verification),純英文,Does the AORUS MASTER 16 BYH not have an RJ-45 Ethernet port?,"No, the AORUS MASTER 16 BYH does include an RJ-45 Ethernet port."
-72,Negative Yes/No (Negative Verification),中英混合,這台 AORUS MASTER 16 筆電沒有支援 NVIDIA® Advanced Optimus 技術嗎？,不，這台 AORUS MASTER 16 筆電有支援 NVIDIA® Advanced Optimus。
-73,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 BXH 的顯示器對比度只有 1000:1 嗎？,"不，AORUS MASTER 16 BXH 的顯示器對比度高達 1,000,000:1。"
-74,Negative Yes/No (Negative Verification),純英文,Is the maximum supported storage for the AM6H series limited to 2TB?,"No, the AM6H series supports up to 4TB PCIe NVMe™ M.2 SSD storage."
-75,Negative Yes/No (Negative Verification),中英混合,這台的 Thunderbolt™5 port 不支援 DisplayPort™ 2.1 嗎？,不，這台的 Thunderbolt™5 port 支援 DisplayPort™ 2.1。
-76,Negative Which (Adversarial Reasoning),純中文,既然 AORUS MASTER 16 BYH 配備的是入門級顯卡，那玩 3A 大作會不會很卡？,您的前提有誤。AORUS MASTER 16 BYH 配備的是 NVIDIA® GeForce RTX™ 5080 Laptop GPU，屬於高階顯示晶片，玩 3A 大作的表現應會非常流暢。
-77,Negative Which (Adversarial Reasoning),純英文,"Given that the AM6H series only offers a basic 60Hz display, will competitive gaming be a poor experience?","Your premise is incorrect. The AM6H series features an OLED WQXGA (2560×1600) display with a 240Hz refresh rate and 1ms response time, providing an excellent experience for competitive gaming."
-78,Negative Which (Adversarial Reasoning),中英混合,如果 AORUS MASTER 16 BZH 的 CPU 只有雙核心，這樣多工處理會不會很慢？,您的前提不正確。AORUS MASTER 16 BZH 的中央處理器是 Intel® Core™ Ultra 9 Processor 275HX，擁有 24 核心 24 執行緒，多工處理能力非常強大。
-79,Negative Which (Adversarial Reasoning),純中文,由於 AORUS MASTER 16 BXH 的電池容量很小，那它是不是沒辦法長時間使用？,您的前提有誤。AORUS MASTER 16 BXH 配備的是 99Wh 的鋰聚合物電池，這是一個高容量電池，能提供良好的續航力。
-80,Negative Which (Adversarial Reasoning),純英文,"Since the AORUS MASTER 16 BYH lacks a dedicated graphics card, how well can it handle graphic design software?","Your premise is incorrect. The AORUS MASTER 16 BYH is equipped with an NVIDIA® GeForce RTX™ 5080 Laptop GPU (16GB GDDR7), which is a powerful dedicated graphics card capable of handling graphic design software very well."
-81,Negative Which (Adversarial Reasoning),中英混合,這台 AM6H 沒有 Thunderbolt port，那我該怎麼接高速外接裝置？,您的前提不正確。AM6H 系列筆電配備 1 個 Thunderbolt™5 Type-C 和 1 個 Thunderbolt™4 Type-C port，可支援高速外接裝置。
-82,Negative Which (Adversarial Reasoning),純中文,既然 AORUS MASTER 16 BZH 的記憶體只能到 16GB，那它夠用嗎？,您的前提有誤。AORUS MASTER 16 BZH 的記憶體最高可擴充至 64GB DDR5 5600MHz，對於大多數應用來說都綽綽有餘。
-83,Negative Which (Adversarial Reasoning),純英文,"If the AORUS MASTER 16 series only supports Wi-Fi 5, will my internet speeds be slow?","Your premise is incorrect. The AORUS MASTER 16 series supports WIFI 7 (802.11be 2x2), which offers significantly faster wireless speeds than Wi-Fi 5."
-84,Negative Which (Adversarial Reasoning),中英混合,這台 AORUS MASTER 16 BXH 的儲存空間只有 512GB，這樣夠裝遊戲嗎？,您的前提不正確。AORUS MASTER 16 BXH 的儲存裝置最高可支援 4TB PCIe NVMe™ M.2 SSD，足以儲存大量遊戲。
-85,Negative Which (Adversarial Reasoning),純中文,既然 AM6H 系列沒有內建視訊鏡頭，那開視訊會議怎麼辦？,您的前提有誤。AM6H 系列內建 FHD (1080p) IR Webcam，並支援 Windows Hello 臉部辨識，可正常進行視訊會議。
-86,Disclaimer (Disclaimer),純中文,如果我自己買了 SSD 拆開 AORUS MASTER 16 BZH 的背蓋加裝，還會有保固嗎？,關於儲存裝置的自行拆裝，若在保固期間內發生無法歸責於技嘉/AORUS 的異常，將不在保固範圍內。詳情請參閱：https://member.aorus.com/global/productwarranty。
-87,Disclaimer (Disclaimer),純英文,Is the weight of the AORUS MASTER 16 BXH precisely 2.5 kg as listed?,"The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation. The listed weight is approximately 2.5 kg."
-88,Disclaimer (Disclaimer),中英混合,AORUS MASTER 16 BYH 的顯卡 AI Boost 是不是能保證一直跑在 1902 MHz？,顯示晶片的 AI Boost 效能可能會因使用情境 (scenario) 而異。本產品所標示之各項效能表現為各晶片廠商或各制定介面官方組織所提出的最大理論值，實際效能可能因規格及設備而有所不同。
-89,Disclaimer (Disclaimer),純中文,AORUS MASTER 16 BZH 的長寬高就是 357 x 254 x 23~29.9 mm，不會有任何誤差嗎？,筆記型電腦的尺寸可能因配置、製造工藝和測量方法而異，請參考實際情況。列出的尺寸為 357 x 254 x 23~29.9 mm。
-90,Disclaimer (Disclaimer),純英文,"If I encounter an issue with my self-installed storage on the AM6H, will it still be covered under warranty?","If there is any abnormality that cannot be attributed to Gigabyte/AORUS during the warranty period regarding storage devices, it is not covered by the warranty. Please check https://member.aorus.com/global/productwarranty for more information."
-91,Out of bound (Out-of-Scope),純中文,這台 AORUS MASTER 16 可以拿來挖礦嗎？,AORUS MASTER 16 是一款高效能電競筆電，主要設計用於遊戲和內容創作。關於挖礦或其他特定應用，我們建議您參考相關專業資訊。
-92,Out of bound (Out-of-Scope),純英文,What is the best gaming laptop brand in the world?,"As a professional AI test engineer, I can only provide information based on the specifications of AORUS products you provided. I cannot offer subjective opinions or comparisons with other brands."
-93,Out of bound (Out-of-Scope),中英混合,這台 AORUS MASTER 16 BZH 的螢幕可以觸控嗎？,我們提供的規格資料中未提及 AORUS MASTER 16 BZH 的螢幕支援觸控功能。
-94,Out of bound (Out-of-Scope),純中文,AORUS MASTER 16 BXH 的價格大概是多少？,抱歉，我無法提供產品價格資訊。產品價格會因各地區經銷商、零售商及市場活動而有所不同，建議您諮詢當地經銷商或零售商以獲取最新報價。
-95,Out of bound (Out-of-Scope),純英文,Can I use the AORUS MASTER 16 BYH for professional video editing as well as gaming?,"Yes, with its Intel® Core™ Ultra 9 Processor 275HX, NVIDIA® GeForce RTX™ 5080 Laptop GPU, up to 64GB DDR5 RAM, and OLED WQXGA display, the AORUS MASTER 16 BYH is well-suited for demanding tasks like professional video editing in addition to gaming."
-96,Out of bound (Out-of-Scope),中英混合,AM6H 系列的保固期是多久？,抱歉，規格表資料中未包含具體的保固期資訊，這可能因國家和地區而異。建議您查閱技嘉官網或諮詢當地經銷商以獲取準確的保固政策。
-97,Out of bound (Out-of-Scope),純中文,AORUS MASTER 16 BZH 還有沒有其他顏色可以選？,根據提供的規格，AORUS MASTER 16 BZH 的顏色是 Dark Tide。目前沒有列出其他顏色選項。
-98,Out of bound (Out-of-Scope),純英文,Is the AORUS MASTER 16 BXH suitable for a student who mostly does office work and web browsing?,"While the AORUS MASTER 16 BXH is a high-performance gaming laptop, it is certainly capable of handling office work and web browsing with ease due to its powerful CPU and ample RAM. However, it might be an overkill for such primary usage."
-99,Out of bound (Out-of-Scope),中英混合,你覺得這台 AORUS MASTER 16 BYH 值得買嗎？,作為 AI 測試工程師，我不能提供主觀購買建議。AORUS MASTER 16 BYH 的規格非常強大，是否值得購買取決於您的個人需求和預算。
-100,Out of bound (Out-of-Scope),純中文,技嘉這台 AORUS MASTER 16 的設計靈感是什麼？,抱歉，提供的規格資料中未包含關於產品設計靈感的資訊。
+3,What (Fact Extraction),中英混合,AORUS BYH 的螢幕 refresh rate 是幾 Hz？,AORUS BYH 的螢幕 refresh rate 是 240Hz。
+4,What (Fact Extraction),純中文,AORUS MASTER 16 BXH 搭載的中央處理器是什麼型號？,AORUS MASTER 16 BXH 搭載 Intel® Core™ Ultra 9 Processor 275HX 中央處理器。
+5,What (Fact Extraction),純英文,How many Type-C ports does the AORUS MASTER 16 BYH have?,The AORUS MASTER 16 BYH has two Type-C ports: one with Thunderbolt™5 and one with Thunderbolt™4.
+6,What (Fact Extraction),中英混合,AM6H 系列的 storage 可以擴充到多大？,AM6H 系列的儲存裝置支援高達 4TB PCIe NVMe™ M.2 SSD。
+7,What (Fact Extraction),純中文,AORUS MASTER 16 BZH 的電池容量是多少？,AORUS MASTER 16 BZH 的電池容量為 Li Polymer 99Wh。
+8,What (Fact Extraction),純英文,What kind of keyboard does the AORUS 16 series use?,The AORUS 16 series uses a 3-zone RGB Backlit Keyboard with up to 1.7mm Key-travel (Support N-Key).
+9,What (Fact Extraction),中英混合,AORUS MASTER 16 BZH 的顯卡 Maximum Graphics Power 是幾瓦？,AORUS MASTER 16 BZH 的顯示晶片支援 175W Maximum Graphics Power with Dynamic Boost*。*May vary by scenario
+10,What (Fact Extraction),純中文,AORUS MASTER 16 BYH 的顯示器是否支援 Dolby Vision®？,是的，AORUS MASTER 16 BYH 的顯示器支援 Dolby Vision®。
+11,What (Fact Extraction),純英文,What is the Bluetooth version on the AM6H laptops?,The AM6H laptops feature Bluetooth v5.4.
+12,What (Fact Extraction),中英混合,AORUS BXH 的 webcam 解析度是多少？,AORUS BXH 的視訊鏡頭解析度是 FHD (1080p) IR Webcam。
+13,What (Fact Extraction),純中文,AORUS MASTER 16 系列支援的 Wi-Fi 標準是什麼？,AORUS MASTER 16 系列支援 WIFI 7 (802.11be 2x2)。
+14,What (Fact Extraction),純英文,What kind of SSD slots does the AORUS 16 have?,The AORUS 16 has one PCIe Gen5 M.2 slot and one PCIe Gen4x4 M.2 slot.
+15,What (Fact Extraction),中英混合,AORUS MASTER 16 BZH 的 processor model name 是什麼？,AORUS MASTER 16 BZH 的處理器型號是 Intel® Core™ Ultra 9 Processor 275HX。
+16,What (Fact Extraction),純中文,AORUS MASTER 16 BYH 的顯示卡記憶體容量是多少？,AORUS MASTER 16 BYH 的顯示晶片配備 16GB GDDR7。
+17,What (Fact Extraction),純英文,Does the AM6H series support Thunderbolt 5?,"Yes, the AM6H series has one Type-C port with Thunderbolt™5 (support USB4, DisplayPort™ 2.1 and Power Delivery 3.0)."
+18,What (Fact Extraction),中英混合,AORUS MASTER 16 BZH 的作業系統有幾種選項？,AORUS MASTER 16 BZH 的作業系統選項包括 Windows 11 Pro (GIGABYTE recommends Windows 11 Pro for business.)、Windows 11 Home 和 UEFI Shell OS。
+19,What (Fact Extraction),純中文,AORUS MASTER 16 BXH 的變壓器是多少瓦的？,AORUS MASTER 16 BXH 使用 330W AC Adapter 變壓器。
+20,What (Fact Extraction),純英文,What are the dimensions of the AORUS MASTER 16 laptops?,"The dimensions are 357 x 254 x 23~29.9 mm. *The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation."
+21,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BZH 螢幕有 G-SYNC 功能嗎？,是的，AORUS MASTER 16 BZH 的螢幕支援 NVIDIA® G-SYNC®。
+22,Yes/No (Positive Verification),純英文,Does the AORUS MASTER 16 BYH have a 1G LAN port?,"Yes, the AORUS MASTER 16 BYH has a 1G LAN port (RJ-45)."
+23,Yes/No (Positive Verification),中英混合,AM6H 系列的 display 是 OLED 嗎？,是的，AM6H 系列筆電的顯示器是 OLED WQXGA (2560×1600) 面板。
+24,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BXH 的喇叭有支援 Dolby Atmos® 嗎？,是的，AORUS MASTER 16 BXH 的音效支援 Dolby Atmos®。
+25,Yes/No (Positive Verification),純英文,Is the AORUS MASTER 16 BZH equipped with an IR webcam for Windows Hello?,"Yes, the AORUS MASTER 16 BZH has an FHD (1080p) IR Webcam that supports Windows Hello Face Authentication."
+26,Yes/No (Positive Verification),中英混合,AORUS MASTER 16 系列的 keyboard 有 RGB 背光嗎？,是的，AORUS MASTER 16 系列的鍵盤是 3-zone RGB Backlit Keyboard。
+27,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BZH 的螢幕有經過 Pantone® 認證嗎？,是的，AORUS MASTER 16 BZH 的螢幕是 Pantone® Validated。
+28,Yes/No (Positive Verification),純英文,Does the AORUS MASTER 16 BYH come with Windows 11 Pro as an option?,"Yes, the AORUS MASTER 16 BYH offers Windows 11 Pro as an operating system option."
+29,Yes/No (Positive Verification),中英混合,AM6H 有 HDMI 2.1 port 嗎？,是的，AM6H 系列筆電都配備 1 個 HDMI 2.1 連接埠。
+30,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BXH 的螢幕具備 TÜV Rheinland 低藍光認證嗎？,是的，AORUS MASTER 16 BXH 的螢幕具備 TÜV Rheinland Low Blue Light 認證。
+31,Yes/No (Positive Verification),純英文,Can I expand the memory in the AORUS MASTER 16 BZH?,"Yes, the AORUS MASTER 16 BZH has 2x SO-DIMM sockets for memory expansion up to 64GB."
+32,Yes/No (Positive Verification),中英混合,AORUS MASTER 16 系列的處理器是 Intel Core Ultra 9 嗎？,是的，AORUS MASTER 16 系列筆電搭載 Intel® Core™ Ultra 9 Processor 275HX。
+33,Yes/No (Positive Verification),純中文,AORUS MASTER 16 BZH 有配備 MicroSD 卡槽嗎？,是的，AORUS MASTER 16 BZH 右側配備 1 個 MicroSD (UHS-II) 卡槽。
+34,Yes/No (Positive Verification),純英文,Does the AORUS MASTER 16 series come in a Dark Tide color?,"Yes, the AORUS MASTER 16 series is available in Dark Tide color."
+35,Yes/No (Positive Verification),中英混合,AM6H 系列的 display 有 VESA DisplayHDR True Black 500 嗎？,是的，AM6H 系列筆電的顯示器支援 VESA DisplayHDR True Black 500。
+36,Which (Comparison),純中文,在 AORUS MASTER 16 BZH、BYH 和 BXH 中，哪一款的顯示晶片 VRAM 容量最大？,AORUS MASTER 16 BZH 的顯示晶片 VRAM 容量最大，為 24GB GDDR7。
+37,Which (Comparison),純英文,Which AORUS MASTER 16 model has the NVIDIA® GeForce RTX™ 5070 Ti Laptop GPU?,The AORUS MASTER 16 BXH has the NVIDIA® GeForce RTX™ 5070 Ti Laptop GPU.
+38,Which (Comparison),中英混合,AM6H 系列哪一台的 GPU 最大功耗是 140W？,AORUS MASTER 16 BXH 的顯示晶片最大功耗是 140W Maximum Graphics Power with Dynamic Boost*。*May vary by scenario
+39,Which (Comparison),純中文,"AORUS MASTER 16 BZH, BYH, BXH 這三款筆電，哪一款的顯示晶片 AI Boost 頻率最高？",AORUS MASTER 16 BXH 的顯示晶片 AI Boost 頻率最高，為 1962 MHz (1762 MHz Boost Clock + 200 MHz OC)*。*May vary by scenario
+40,Which (Comparison),純英文,"Between BZH and BYH, which model has 16GB GDDR7 for its GPU?",The AORUS MASTER 16 BYH has 16GB GDDR7 for its NVIDIA® GeForce RTX™ 5080 Laptop GPU.
+41,Which (Comparison),中英混合,AORUS MASTER 16 的哪一款配備 RTX 5080 顯卡？,AORUS MASTER 16 BYH 配備 NVIDIA® GeForce RTX™ 5080 Laptop GPU。
+42,Which (Comparison),純中文,AM6H 系列的 BZH 和 BYH，它們的顯示晶片最大功耗有差異嗎？,沒有差異，AORUS MASTER 16 BZH 和 BYH 的顯示晶片最大功耗都是 175W Maximum Graphics Power with Dynamic Boost*。*May vary by scenario
+43,Which (Comparison),純英文,Which AORUS MASTER 16 model has the lowest GPU VRAM amount?,"The AORUS MASTER 16 BXH has the lowest GPU VRAM amount, with 12GB GDDR7."
+44,Which (Comparison),中英混合,AORUS MASTER 16 系列中，哪一台的顯示卡是 5090？,AORUS MASTER 16 BZH 配備 NVIDIA® GeForce RTX™ 5090 Laptop GPU。
+45,Which (Comparison),純中文,AORUS MASTER 16 BZH 和 BYH 在處理器型號上有什麼區別？,AORUS MASTER 16 BZH 和 BYH 在處理器型號上沒有區別，兩者都搭載 Intel® Core™ Ultra 9 Processor 275HX。
+46,Which (Comparison),純英文,"Are there any differences in the display specifications across the AORUS MASTER 16 BZH, BYH, and BXH models?","No, all AORUS MASTER 16 BZH, BYH, and BXH models share the same display specifications: 16"" 16:10 OLED WQXGA (2560×1600) 240Hz, 1ms, DCIP-3 100%, 500nits (peak), 1,000,000:1, with G-SYNC and other features."
+47,Which (Comparison),中英混合,AM6H 系列哪一台的 AI Boost 是 1797 MHz？,AORUS MASTER 16 BZH 的顯示晶片 AI Boost 頻率是 1797 MHz (1597 MHz Boost Clock + 200 MHz OC)*。*May vary by scenario
+48,Which (Comparison),純中文,AORUS MASTER 16 BZH、BYH 和 BXH 的作業系統選項都一樣嗎？,"是的，這三款筆電的作業系統選項都相同，包括 Windows 11 Pro, Windows 11 Home 和 UEFI Shell OS。"
+49,Which (Comparison),純英文,"Among the AORUS MASTER 16 models, which GPU has an AI Boost of 1902 MHz?",The AORUS MASTER 16 BYH's NVIDIA® GeForce RTX™ 5080 Laptop GPU has an AI Boost of 1902 MHz (1702 MHz Boost Clock + 200 MHz OC)*. *May vary by scenario
+50,Which (Comparison),中英混合,AORUS MASTER 16 BXH 的 GPU power 比 BZH 小多少？,AORUS MASTER 16 BXH 的顯示晶片最大功耗是 140W，而 BZH 是 175W，所以 BXH 比 BZH 少 35W。*May vary by scenario
+51,Summarize (Summarization),純中文,請幫我總結一下 AORUS MASTER 16 BZH 的顯示器所有主要特色。,"AORUS MASTER 16 BZH 的顯示器主要特色包括：16 吋 16:10 OLED WQXGA (2560×1600) 面板、240Hz 刷新率、1ms 反應時間、DCIP-3 100% 色域、500nits 峰值亮度、1,000,000:1 對比度。它還支援 NVIDIA® G-SYNC®、NVIDIA® Advanced Optimus、VESA DisplayHDR True Black 500、VESA ClearMR 10000、Pantone® Validated、TÜV Rheinland Low Blue Light 和 Dolby Vision®。"
+52,Summarize (Summarization),純英文,List all the I/O ports available on the AORUS MASTER 16 series.,"The AORUS MASTER 16 series features the following I/O ports: Left Side: 1 x DC in; 1 x RJ-45; 1 x HDMI 2.1; 1 x Type-A support USB3.2 Gen2; 1 x Type-C with Thunderbolt™5 (support USB4, DisplayPort™ 2.1 and Power Delivery 3.0); Right Side: 1 x Type-A support USB3.2 Gen2; 1 x Type-C with Thunderbolt™4 (support USB4, DisplayPort™ 1.4 and Power Delivery 3.0); 1 x MicroSD (UHS-II); 1 x Audio Jack support mic / headphone combo."
+53,Summarize (Summarization),中英混合,AM6H 的 security features 有哪些？,AM6H 系列筆電的安全裝置包括 Firmware-based TPM，並支援 Intel® Platform Trust Technology (Intel® PTT)。此外，視訊鏡頭支援 Windows Hello Face Authentication。
+54,Summarize (Summarization),純中文,請說明 AORUS MASTER 16 BYH 的記憶體擴充能力。,AORUS MASTER 16 BYH 的記憶體最高可擴充至 64GB DDR5 5600MHz，並提供 2 個 SO-DIMM 插槽供擴充使用。
+55,Summarize (Summarization),純英文,Summarize the communication capabilities of the AORUS MASTER 16 BXH.,"The AORUS MASTER 16 BXH offers WIFI 7 (802.11be 2x2), LAN (1G), and Bluetooth v5.4 for its communication capabilities."
+56,Summarize (Summarization),中英混合,請告訴我 AORUS MASTER 16 系列的 audio specs。,AORUS MASTER 16 系列的音效規格包括 4 個 2W 喇叭、內建麥克風、支援 Dolby Atmos® 和 Smart Amp Technology。
+57,Summarize (Summarization),純中文,AORUS MASTER 16 BZH 的儲存裝置配置是怎麼樣的？,AORUS MASTER 16 BZH 的儲存裝置配置包含 1 個 PCIe Gen5 M.2 插槽和 1 個 PCIe Gen4x4 M.2 插槽，最高可安裝 4TB PCIe NVMe™ M.2 SSD。
+58,Summarize (Summarization),純英文,What operating systems are supported by the AORUS MASTER 16 series?,"The AORUS MASTER 16 series supports Windows 11 Pro (GIGABYTE recommends Windows 11 Pro for business.), Windows 11 Home, and UEFI Shell OS."
+59,Summarize (Summarization),中英混合,AM6H 系列的 display 認證有哪些？,AM6H 系列筆電的顯示器認證包括 NVIDIA® G-SYNC®、NVIDIA® Advanced Optimus、VESA DisplayHDR True Black 500、VESA ClearMR 10000、Pantone® Validated、TÜV Rheinland Low Blue Light 以及 Dolby Vision®。
+60,Summarize (Summarization),純中文,請列出 AORUS MASTER 16 BYH 的顯卡主要規格。,AORUS MASTER 16 BYH 的顯示晶片是 NVIDIA® GeForce RTX™ 5080 Laptop GPU，配備 16GB GDDR7 記憶體，支援 175W Maximum Graphics Power with Dynamic Boost*，AI Boost 頻率為 1902 MHz (1702 MHz Boost Clock + 200 MHz OC)*。*May vary by scenario
+61,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 BZH 的記憶體還是用 DDR4 嗎？,不是，AORUS MASTER 16 BZH 的記憶體是 DDR5 5600MHz，最高可達 64GB。
+62,Negative Yes/No (Negative Verification),純英文,Does the AORUS MASTER 16 BYH come with a 15-inch screen?,"No, the AORUS MASTER 16 BYH features a 16-inch 16:10 OLED WQXGA (2560×1600) display."
+63,Negative Yes/No (Negative Verification),中英混合,AORUS BXH 的螢幕是 IPS 面板嗎？,不是，AORUS BXH 的螢幕是 OLED WQXGA (2560×1600) 面板。
+64,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 系列有提供 8GB 記憶體選項嗎？,不，AORUS MASTER 16 系列的記憶體配置最高支援 64GB DDR5 5600MHz，最低配置未明確說明，但通常遊戲筆電不會提供 8GB 選項且有兩個擴充槽，可升級到更大容量。
+65,Negative Yes/No (Negative Verification),純英文,Is the CPU in the AORUS MASTER 16 series an AMD Ryzen processor?,"No, the AORUS MASTER 16 series is powered by an Intel® Core™ Ultra 9 Processor 275HX."
+66,Negative Yes/No (Negative Verification),中英混合,AORUS MASTER 16 的 HDMI port 還是 2.0 嗎？,不是，AORUS MASTER 16 系列筆電配備的是 HDMI 2.1 連接埠。
+67,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 BZH 的顯示卡是 RTX 4080 嗎？,不是，AORUS MASTER 16 BZH 配備的是 NVIDIA® GeForce RTX™ 5090 Laptop GPU。
+68,Negative Yes/No (Negative Verification),純英文,Does the AM6H series have a 720p webcam?,"No, the AM6H series comes with an FHD (1080p) IR Webcam."
+69,Negative Yes/No (Negative Verification),中英混合,AORUS MASTER 16 BXH 的 LAN 是 2.5G 的嗎？,不是，AORUS MASTER 16 BXH 的 LAN 是 1G。
+70,Negative Yes/No (Negative Verification),純中文,這台筆電的重量超過 3 公斤嗎？,這台筆電的重量約為 ~2.5 公斤。*筆電的重量可能會因配置、製造過程和測量方法而有所不同，請參考實際情況。
+71,Negative Yes/No (Negative Verification),純英文,Is the AORUS MASTER 16 BYH limited to PCIe Gen4 SSDs?,"No, the AORUS MASTER 16 BYH has one PCIe Gen5 M.2 slot and one PCIe Gen4x4 M.2 slot, supporting up to 4TB PCIe NVMe™ M.2 SSDs."
+72,Negative Yes/No (Negative Verification),中英混合,AORUS MASTER 16 BZH 的螢幕反應時間是不是 3ms？,不是，AORUS MASTER 16 BZH 的螢幕反應時間是 1ms。
+73,Negative Yes/No (Negative Verification),純中文,AORUS MASTER 16 系列有 Thunderbolt 3 嗎？,不是，AORUS MASTER 16 系列配備更先進的 Thunderbolt™5 (左側) 和 Thunderbolt™4 (右側) 連接埠。
+74,Negative Yes/No (Negative Verification),純英文,Does the AORUS MASTER 16 BXH use a 280W power adapter?,"No, the AORUS MASTER 16 BXH uses a 330W AC Adapter."
+75,Negative Yes/No (Negative Verification),中英混合,AM6H 系列的 WIFI standard 是 Wi-Fi 6 嗎？,不是，AM6H 系列筆電支援的是更新的 WIFI 7 (802.11be 2x2)。
+76,Negative Which (Adversarial Reasoning),純中文,既然 AORUS MASTER 16 BZH 顯卡的 AI Boost 頻率比 BXH 低，是不是代表 BZH 效能比較差？,不是的。雖然 AORUS MASTER 16 BZH 的顯示晶片 AI Boost 頻率為 1797 MHz，低於 BXH 的 1962 MHz，但 BZH 配備的是更高級的 NVIDIA® GeForce RTX™ 5090 Laptop GPU，擁有 24GB GDDR7 記憶體和 175W 最大功耗，而 BXH 則是 RTX™ 5070 Ti 搭配 12GB GDDR7 和 140W 最大功耗。因此，BZH 的整體顯示效能會更強。GPU 效能會因應用情境而異，詳細資訊請參考免責聲明：*May vary by scenario。
+77,Negative Which (Adversarial Reasoning),純英文,"If the AORUS MASTER 16 BYH only has 16GB VRAM, can it really handle 4K gaming?","Yes, the AORUS MASTER 16 BYH's NVIDIA® GeForce RTX™ 5080 Laptop GPU with 16GB GDDR7 and 175W Maximum Graphics Power is very capable of handling 4K gaming, especially on its native WQXGA (2560x1600) OLED display. The actual performance may vary depending on the game and settings. *May vary by scenario."
+78,Negative Which (Adversarial Reasoning),中英混合,AM6H 系列既然螢幕是 2K 的，那玩遊戲會不會看不清楚細節？,不是的。AM6H 系列的顯示器是 OLED WQXGA (2560×1600)，這是一個非常高的解析度（比傳統 FHD 1080p 更細膩），能呈現出色的影像細節。搭配 240Hz 刷新率和 1ms 反應時間，遊戲體驗將會非常流暢且清晰。
+79,Negative Which (Adversarial Reasoning),純中文,AORUS MASTER 16 BXH 的顯示卡功耗只有 140W，是不是代表它比其他兩款弱很多？,雖然 AORUS MASTER 16 BXH 的顯示晶片 NVIDIA® GeForce RTX™ 5070 Ti Laptop GPU 功耗為 140W，確實低於 BZH 和 BYH 的 175W，但在其定位下，這仍然是一個非常強大的 GPU 配置，足以應對大多數高階遊戲。它的 AI Boost 頻率甚至更高。顯示卡效能是一個綜合性的考量，單純看功耗並不能完全代表一切。*May vary by scenario。
+80,Negative Which (Adversarial Reasoning),純英文,"Given that all AM6H models have the same CPU, does that mean their gaming performance will be identical?","Not necessarily. While all AM6H models share the Intel® Core™ Ultra 9 Processor 275HX, their gaming performance will primarily differ based on their respective NVIDIA® GeForce RTX™ Laptop GPUs. The BZH model with an RTX™ 5090 will generally outperform the BYH (RTX™ 5080) and BXH (RTX™ 5070 Ti). GPU performance may vary by scenario (*May vary by scenario)."
+81,Negative Which (Adversarial Reasoning),中英混合,如果我需要很多 USB-A ports，那這台 AM6H 會不會不夠用？,不是的，AM6H 系列筆電提供了兩個 Type-A support USB3.2 Gen2 連接埠，左右各一，對於一般使用者來說是足夠的。如果您的設備特別多，可以考慮使用 USB Hub 擴充。
+82,Negative Which (Adversarial Reasoning),純中文,AORUS MASTER 16 BZH 的顯示晶片標示有 AI Boost，是不是代表它只能跑 AI 相關的程式？,不是的。「AI Boost」指的是顯示晶片在特定情況下可以自動提升頻率，以優化遊戲或其他應用程式的效能，包括 AI 相關任務。它仍然是功能完整的 NVIDIA® GeForce RTX™ 5090 Laptop GPU，能處理各種圖形密集型工作。
+83,Negative Which (Adversarial Reasoning),純英文,"Since the AORUS MASTER 16 series has a 1G LAN, is it too slow for modern online gaming?","No, a 1G (Gigabit) LAN connection is still the standard for high-speed wired internet and is perfectly adequate for modern online gaming, providing stable and low-latency connections. WIFI 7 is also available for high-speed wireless connectivity."
+84,Negative Which (Adversarial Reasoning),中英混合,AORUS MASTER 16 的重量大概 2.5kg，會不會 portable 很差？,不是的，對於一台 16 吋的高階電競筆電而言，約 2.5 公斤的重量屬於主流範圍，提供了性能與移動性之間的平衡。這不是一個特別沉重的重量，仍具備一定的攜帶性。*筆電的重量可能會因配置、製造過程和測量方法而有所不同，請參考實際情況。
+85,Negative Which (Adversarial Reasoning),純中文,AORUS MASTER 16 BYH 既然是電競筆電，那是不是代表電池續航力很差？,不一定。AORUS MASTER 16 BYH 配備 Li Polymer 99Wh 大容量電池，這是目前筆電能配置的最大電池容量之一，旨在提供更長的續航時間。實際續航力會根據使用情境（例如玩遊戲或輕度辦公）而有很大差異。
+86,Disclaimer (Disclaimer),純中文,AORUS MASTER 16 BYH 官網標示的重量是 2.5 公斤，我收到時測量怎麼有誤差？,"筆電的重量可能會因配置、製造過程和測量方法而有所不同，請參考實際情況。*The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation。"
+87,Disclaimer (Disclaimer),純英文,"If I add a larger SSD to my AORUS MASTER 16 BZH myself, will it void the warranty?","Regarding storage device warranty: *If there is any abnormality that cannot be attributed to Gigabyte/AORUS during the warranty period, it is not covered by the warranty. It's recommended to contact your local dealers or retailers for the latest product information and warranty terms."
+88,Disclaimer (Disclaimer),中英混合,AORUS MASTER 16 BXH 顯示晶片的 140W power 是保證能達到的嗎？,顯示晶片的 Maximum Graphics Power with Dynamic Boost* 可能會因應用情境而異。*May vary by scenario。
+89,Disclaimer (Disclaimer),純中文,AORUS MASTER 16 系列標示的最大儲存容量是 4TB，我可以裝到 6TB 嗎？,AORUS MASTER 16 系列筆電的儲存裝置支援高達 4TB PCIe NVMe™ M.2 SSD。請注意，儲存容量可能因國家和地區而異。*The storage capacity may differ by country and region. Please contact your local dealers or retailers for the latest product information。
+90,Disclaimer (Disclaimer),純英文,"The dimensions for AORUS MASTER 16 BZH are listed, but my unit seems slightly different, why?","The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation. *The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation."
+91,Out of bound (Out-of-Scope),純中文,AORUS MASTER 16 跟華碩的 Zephyrus 系列哪一款比較好？,很抱歉，我只能提供技嘉 AORUS MASTER 16 系列筆電的相關資訊。關於與其他品牌產品的比較，建議您查閱專業評測或根據您的個人需求進行選擇。
+92,Out of bound (Out-of-Scope),純英文,Will the AORUS MASTER 16 BZH be available in white color soon?,"Currently, the AORUS MASTER 16 BZH is only available in Dark Tide color. I do not have information on future color options."
+93,Out of bound (Out-of-Scope),中英混合,這台筆電的 resell value 會很高嗎？,很抱歉，我無法預測筆電的轉售價值。這會受到市場需求、產品狀況和時間等多種因素影響。
+94,Out of bound (Out-of-Scope),純中文,AORUS MASTER 16 BXH 玩賽博龐克 2077 能開光追特效嗎？,AORUS MASTER 16 BXH 配備 NVIDIA® GeForce RTX™ 5070 Ti Laptop GPU，理論上支援光線追蹤技術。實際遊戲效能和特效設定會因遊戲版本、驅動程式以及具體遊戲內設定而異。*May vary by scenario。
+95,Out of bound (Out-of-Scope),純英文,When will Gigabyte release the next generation of AORUS MASTER 16 laptops?,I do not have any information regarding future product releases or launch dates for the next generation of AORUS MASTER 16 laptops.
+96,Out of bound (Out-of-Scope),中英混合,AORUS MASTER 16 系列的 BIOS 可以自己 update 嗎？,技嘉通常會提供 BIOS 更新工具供使用者自行更新，但建議您參閱官方支援頁面上的詳細說明和教學，以確保正確操作，避免潛在風險。
+97,Out of bound (Out-of-Scope),純中文,這台筆電有提供學生優惠嗎？,很抱歉，我無法直接提供優惠資訊。請洽詢您當地的經銷商或零售商，或參考技嘉官方網站是否有相關促銷活動或學生專案。
+98,Out of bound (Out-of-Scope),純英文,Is the AORUS MASTER 16 series suitable for professional video editing?,"The AORUS MASTER 16 series, with its Intel® Core™ Ultra 9 Processor, up to 64GB DDR5 RAM, high-end NVIDIA® GeForce RTX™ GPUs, and WQXGA OLED display, is highly capable for professional video editing. However, suitability can depend on specific software and workflow requirements. *May vary by scenario."
+99,Out of bound (Out-of-Scope),中英混合,AM6H 的 packaging 有沒有附贈其他 accessories？,很抱歉，產品包裝內的配件會因國家和地區的實際出貨情況而有所不同。建議您諮詢當地經銷商或零售商了解最新資訊。
+100,Out of bound (Out-of-Scope),純中文,AORUS MASTER 16 BYH 能用外接顯卡盒嗎？,AORUS MASTER 16 BYH 配備 Thunderbolt™5 和 Thunderbolt™4 連接埠，理論上支援外接顯卡盒。但兼容性仍需視外接顯卡盒本身規格與軟硬體支援而定，建議您確認外接顯卡盒的兼容性資訊。

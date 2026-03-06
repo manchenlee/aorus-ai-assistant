@@ -10,6 +10,7 @@ class AORUSAssistant:
         # 1. 初始化 Retriever
         self.retriever = AorusRetriever()
         self.converter = opencc.OpenCC('s2twp')
+        self.last_context = ""
 
         # 2. 初始化 llama.cpp 模型
         print(f"Loading llama.cpp: {model_path}...")
@@ -35,6 +36,7 @@ class AORUSAssistant:
         # A. 檢索 RAG 內容
         related_chunks = self.retriever.retrieve(user_query, k=4)
         context_text = "\n".join(related_chunks)
+        self.last_context = context_text
 
         has_chinese = bool(re.search(r'[\u4e00-\u9fff]', user_query))
 
@@ -42,7 +44,7 @@ class AORUSAssistant:
             L = {
                 "name": "Traditional Chinese (繁體中文)",
                 "start_info": "根據規格，",
-                "start_none": "很抱歉，",
+                "start_none": "很抱歉，我是 AORUS MASTER 16 系列的 AI 助理，",
                 "start_norm": "關於",
                 "knowledge_base": "知識庫"
             }
@@ -50,7 +52,7 @@ class AORUSAssistant:
             L = {
                 "name": "English",
                 "start_info": "Based on the specifications,",
-                "start_none": "I'm Sorry,",
+                "start_none": "I'm sorry, I am the AI assistant for the AORUS MASTER 16 series,",
                 "start_norm": "About",
                 "knowledge_base": "knowledge base"
             }
@@ -162,7 +164,7 @@ Please strictly adhere to the following output format (Extract data to draft fir
 # --- 單機簡單測試區 ---
 if __name__ == "__main__":
     bot = AORUSAssistant()
-    print("\n✅ AORUS AI Assistant is Online! (type \'exit\' to exit.)")
+    print("\nAORUS AI Assistant is Online! (type \'exit\' to exit.)")
     while True:
         query = input("\n[User]: ")
         if query.lower() == 'exit':

@@ -162,7 +162,6 @@ class AorusRetriever:
 
         # 根據 RRF 分數進行最終排序
         final_ranking = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
-
         # 回傳 Top K 的 Chunk
         return [self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]]
 
