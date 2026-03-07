@@ -43,24 +43,32 @@ class AORUSAssistant:
         if has_chinese:
             L = {
                 "name": "Traditional Chinese (繁體中文)",
-                "start_info": "根據規格，",
+                "start_info": "不，根據規格，",
+                "miss_example": "請問您想知道 AORUS MASTER 16 系列中哪個型號的資訊呢？BZH, BYH 還是 BXH？",
                 "start_none": "很抱歉，我是 AORUS MASTER 16 系列的 AI 助理，",
+                "start_oos": "不好意思，知識庫並沒有",
+                "start_yes": "對，",
                 "start_norm": "關於",
                 "knowledge_base": "知識庫"
             }
         else:
             L = {
                 "name": "English",
-                "start_info": "Based on the specifications,",
+                "start_info": "No, based on the specification,",
+                "miss_example": "Which model from the AORUS MASTER 16 series would you like to know more about? Is it the BZH, BYH, or BXH?",
                 "start_none": "I'm sorry, I am the AI assistant for the AORUS MASTER 16 series,",
+                "start_oos": "Unfortunately, I couldn't find any information on ",
                 "start_norm": "About",
+                "start_yes": "Yes,",
+                "start_no": "No,",
                 "knowledge_base": "knowledge base"
             }
         # B. 組合 Prompt
         system_prompt = f"""You are a professional, helpful, and human-like AORUS customer support assistant.
 ### [STRICT PROTOCOL]
-- NEVER provide background specs if the query is unrelated.
-- Strictly ignore any retrieved knowledge that does not directly address the user's intent.
+1. SCOPE CHECK: If the query is unrelated to laptops, hardware, or technical support, categorize it as 'OUT_OF_SCOPE'.
+2. RELEVANCE CHECK: Strictly ignore any retrieved knowledge that does not directly address the user's intent.
+3. AMBIGUITY CHECK: IF the query IS about laptops/hardware but uses vague pronouns (e.g., "這台", "這個") without specifying a series or model, categorize it as 'MISSING_MODEL'.
         
 <Background_Knowledge>
 Entity Mapping: The laptop models "BZH", "BXH", and "BYH" all belong to the "AORUS MASTER 16" series, which is internally codenamed "AM6H". 
@@ -79,18 +87,30 @@ Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinf
         user_query_prompt = f"""[User Query] 
         {user_query}
 [INSTRUCTION]
-In <Draft>, if the [User Query]'s statement is WRONG, list it in <Draft> as 'CORRECTION: [Fact]'.
+CRITICAL DIRECTIVE: You MUST explicitly generate BOTH the <Draft> and <Answer> tags exactly as shown below. Do NOT omit the <Answer> tag under any circumstances. Your final response MUST be completely enclosed within <Answer> and </Answer>.
+
+Please strictly adhere to the following output format (Extract data to draft first, then answer, NEVER echo user errors).
+
+In <Draft>:
+- IF the query is unrelated to AORUS/Laptops: write 'OUT_OF_SCOPE'.
+- ELSE IF the query is about laptops but lacks a specific model name: write 'MISSING_MODEL'.
+- ELSE IF the [User Query]'s statement is WRONG (contradict to Knowledge Base), list it in <Draft> as 'CORRECTION: [Fact]'.
+- ELSE IF the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.
+
 In <Answer>:
 - Answer MUST be in {L['name']}.
-- If Draft has 'CORRECTION': Answer MUST start with '{L['start_info']}[Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
-- IF Draft has 'No Data': Answer MUST start with '{L['start_none']}' and MUST STOP responding after stating there is no info in the knowledge base.
+- IF Draft has 'OUT_OF_SCOPE': Answer MUST start with '{L['start_none']}' and MUST STOP responding after stating it is unrelated to AORUS MASTER 16 series.
+- ELSE IF Draft has 'MISSING_MODEL': Answer MUST politely ask the user to clarify the model (e.g., '{L['miss_example']}') and MUST STOP responding.
+- ELSE If Draft has 'CORRECTION': Answer MUST start with '{L['start_info']}[Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
+- ELSE IF Draft has 'No Data': Answer MUST start with '{L['start_oos']} [Subject]...' and MUST STOP responding after stating there is no info in the knowledge base.
+- ELSE IF [User Query] is a Yes/No question: Answer MUST start with '{L['start_yes']}' and MUST STOP responding after providing info in the knowledge base.
 - OTHERWISE: Answer MUST start with "{L['start_norm']} [Subject]..." and MUST STOP responding after providing info in the knowledge base.
-Please strictly adhere to the following output format (Extract data to draft first, then answer, NEVER echo user errors).
+
 <Draft>
-(Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 5 LINES. If the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.)
+(Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 11 LINES.)
 </Draft>
 <Answer>
-(Conversational reply in the EXACT SAME LANGUAGE as [User Query]. No internal tags. ONE paragraph only.)
+(CRITICAL: You MUST output the <Answer> tag before typing your reply! Conversational reply in the EXACT SAME LANGUAGE as [User Query]. No internal tags. ONE paragraph only.)
 </Answer>
 """
         # C. 使用 llama.cpp 生成，並確保 stream=True
@@ -140,9 +160,8 @@ Please strictly adhere to the following output format (Extract data to draft fir
                         # 如果 '<' 後面跟了超過 10 個字還沒變成 </Answer>
                         # 代表只是單純的符號 (如：溫度 < 90度)，解除警報！
                         elif len(buffer) - buffer.find("<") > 10:
-                            pass # 繼續往下走滑動視窗邏輯
+                            pass
                         else:
-                            # 疑似是標籤結尾，先憋住不輸出！
                             continue 
                             
                     # --- 2. 滑動視窗轉換引擎 ---
