@@ -17,7 +17,7 @@
     "尺寸 (Dimensions/Size)": ["尺寸", "長寬高", "Dimensions", "Size", "多大", "大小", "measurements", "form factor"],
     "重量 (Weight/Mass)": ["重量", "重", "Weight", "Mass", "kg", "多重", "heavy", "lbs"],
     "連接埠 (I/O Ports/Interface/USB/HDMI)": ["連接埠", "I/O Ports", "Interface", "接口", "插槽", "孔", "洞", "ports", "jacks", "plugs", "slots", "Type-C"],
-    "鍵盤種類 (Keyboard/Backlight)": ["鍵盤種類", "Keyboard", "按鍵", "鍵盤", "keys", "keypad"],
+    "鍵盤 (Keyboard/Backlight)": ["鍵盤", "Keyboard", "按鍵", "鍵盤", "keys", "keypad"],
     "音效 (Audio/Speakers/Mic)": ["音效", "Audio", "Speakers", "Mic", "喇叭", "麥克風", "聲音", "音質", "sound"],
     "安全裝置 (Security/TPM/Fingerprint)": ["安全裝置", "Security", "TPM", "指紋辨識", "Fingerprint", "指紋"],
     "顯示晶片 (GPU/Graphics) GDDR7": ["VRAM", "GDDR7", "顯存", "video memory"], 

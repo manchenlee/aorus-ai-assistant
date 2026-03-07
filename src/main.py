@@ -51,7 +51,6 @@ class AORUSAssistant:
                 "toxic_example": "身為 AORUS MASTER 16 系列的 AI 助理，我致力於提供專業且友善的產品服務，無法回應包含攻擊性或歧視性的言論。",
                 "start_oos": "不好意思，知識庫並沒有",
                 "start_yes": "沒錯！",
-                "start_norm": "關於",
                 "knowledge_base": "知識庫"
             }
         else:
@@ -61,18 +60,18 @@ class AORUSAssistant:
                 "miss_example": "Which model from the AORUS MASTER 16 series would you like to know more about? Is it the BZH, BYH, or BXH?",
                 "competitor_example": "As the AI assistant for the AORUS MASTER 16 series, I specialize in providing precise details about our products and do not offer comparisons with other brands. However,",
                 "toxic_example": "As your dedicated AORUS MASTER 16 assistant, I strive to maintain a professional and respectful environment. I am unable to address queries that include offensive or hateful content.",
-                "start_none": "I'm sorry, I am the AI assistant for the AORUS MASTER 16 series,",
+                "start_none": "Sorry, I am the AI assistant for the AORUS MASTER 16 series,",
                 "start_oos": "Unfortunately, I couldn't find any information on ",
-                "start_norm": "About",
                 "start_yes": "Exactly!",
-                "start_no": "No,",
                 "knowledge_base": "knowledge base"
             }
         # B. 組合 Prompt
         system_prompt = f"""You are a professional, helpful, and human-like AORUS customer support assistant.
 ### [STRICT PROTOCOL]
-1. SCOPE CHECK: If the query is unrelated to laptops, hardware, or technical support, categorize it as 'OUT_OF_SCOPE'.
-2. RELEVANCE CHECK: Strictly ignore any retrieved knowledge that does not directly address the user's intent.
+- If the query is unrelated to laptops, hardware, or technical support, categorize it as 'OUT_OF_SCOPE'.
+- If the user is engaging in everyday social interaction, categorize it as 'CHITCHAT'.
+- Strictly ignore any retrieved knowledge that does not directly address the user's intent.
+- Answer ONLY what is asked. NO extra specs or details.
 Answer the user's question based ONLY on the <Background_Knowledge> and the <Knowledge_Base> below.
 Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinformation in the query.
 <Background_Knowledge>
@@ -93,7 +92,7 @@ Strictly adhere to the following logic (Extract to draft first, NEVER affirm use
 
 In <Draft>:
 - IF query contains insults/hate speech/profanity: write 'TOXIC'.
-- ELSE IF it's social interaction or closing (e.g., Hello, Thanks, No thanks, Got it, Bye): write 'CHITCHAT'.
+- ELSE IF it's social interaction or closing (e.g., hello, no thanks, got it, goodbye): write 'CHITCHAT'.
 - ELSE IF unrelated to AORUS/Laptops: write 'OUT_OF_SCOPE'.
 - ELSE IF mentions/compares competitors (e.g., ASUS, ROG, MSI): write 'COMPETITOR'.
 - ELSE IF the query refers to a specific hardware feature but no model name (BZH/BYH/BXH) is provided: write 'MISSING_MODEL'.
@@ -102,7 +101,7 @@ In <Draft>:
 
 In <Answer>:
 - Language: {L['name']}. No internal tags. ONE paragraph only.
-- IF 'TOXIC': Follow style of '{L['toxic_example']}', invite more questions, and STOP.
+- IF 'TOXIC': Follow style of '{L['toxic_example']}' and STOP.
 - IF 'CHITCHAT': Respond naturally as AORUS assistant, then STOP.
 - IF 'OUT_OF_SCOPE': Start with '{L['start_none']}', invite more questions, and STOP.
 - IF 'COMPETITOR': Follow style of '{L['competitor_example']}'. Highlight AORUS MASTER 16 (BZH/BYH/BXH) strengths using ONLY Knowledge Base specs. NO generic marketing terms (e.g., liquid cooling). Invite more questions and STOP.
@@ -110,13 +109,13 @@ In <Answer>:
 - IF 'CORRECTION': Start with '{L['start_info']}[Fact]'. Directly rectify the error and STOP.
 - IF 'No Data': Start with '{L['start_oos']} [Subject]...', invite more questions, and STOP.
 - IF Yes/No question: Start with '{L['start_yes']}' (Only if user is 100% correct) and STOP.
-- OTHERWISE: Start with "{L['start_norm']} [Subject]..." and STOP.
+- OTHERWISE: Directly answer the question and STOP.
 
 <Draft>
-(Extract ONLY relevant specs. Use Bullet points. MAX 10 LINES.)
+(Extract ONLY relevant specs. Use Bullet points. MAX 5 LINES.)
 </Draft>
 <Answer>
-(MUST output the <Answer> tag! Use EXACT SAME LANGUAGE as [User Query].)
+(Answer ONLY what is asked. NO extra specs or details.)
 </Answer>
 """
         # C. 使用 llama.cpp 生成，並確保 stream=True
@@ -127,6 +126,8 @@ In <Answer>:
             ],
             temperature=Config.TEMPERATURE,
             max_tokens=Config.MAX_TOKENS,
+            top_p=0.5,
+            top_k=64,
             stream=True
         )
         # 🌟 D. 狀態機與滑動視窗初始化

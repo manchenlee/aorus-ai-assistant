@@ -7,8 +7,7 @@ An instruction (might include an Input inside it), a query, a response to evalua
 5. Only evaluate on common things between generated answer and reference answer. Don't evaluate on things which are present in reference answer but not in generated answer.
 
 ###Instruction:
-Your task is to evaluate the generated answer and reference answer for the following query:
-{query}
+Your task is to evaluate whether the generated answer accurately reflects the facts provided in the reference answer.
 
 ###Generate answer to evaluate:
 {generated_answer}
@@ -17,11 +16,11 @@ Your task is to evaluate the generated answer and reference answer for the follo
 {reference_answer}
 
 ###Score Rubrics:
-Score 1: If the generated answer is not relevant to the user query and reference answer.
-Score 2: If the generated answer is according to reference answer but not relevant to user query.
-Score 3: If the generated answer is relevant to the user query and reference answer but contains mistakes.
-Score 4: If the generated answer is relevant to the user query and has the exact same metrics as the reference answer, but it is not as concise.
-Score 5: If the generated answer is relevant to the user query and fully correct according to the reference answer.
+Score 1: If the generated answer is not relevant to the reference answer.
+Score 2: If the generated answer is according to reference answer.
+Score 3: If the generated answer is relevant to the reference answer but contains mistakes.
+Score 4: If the generated answer has the exact same metrics as the reference answer, but it is not as concise.
+Score 5: If the generated answer is fully correct according to the reference answer.
 
 ###Feedback:"""
 

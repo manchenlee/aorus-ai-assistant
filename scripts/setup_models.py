@@ -26,7 +26,7 @@ def setup():
         )
 
     # ==========================================
-    # 2. 下載 Judge 模型 (TruLens 裁判用)
+    # 2. 下載 Judge 模型 (DeepEval 裁判用)
     # ==========================================
     judge_model_name = os.path.basename(Config.JUDGE_MODEL_FILE)
     if os.path.exists(Config.JUDGE_MODEL_FILE):

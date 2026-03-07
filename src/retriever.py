@@ -25,6 +25,10 @@ class AorusRetriever:
         self.replace_dict = {}
         self.pattern = None 
 
+        jieba.add_word("BZH", freq=5000)
+        jieba.add_word("BYH", freq=5000)
+        jieba.add_word("BXH", freq=5000)
+
         if os.path.exists(synonym_path):
             print(f"Reading synonyms from {synonym_path}...")
             with open(synonym_path, 'r', encoding='utf-8') as f:
@@ -78,8 +82,8 @@ class AorusRetriever:
         # 第一階段：組裝【產品完整規格】
         # ==========================================
         for model_name, specs in data.items():
-            doc_display_lines = [f"【產品完整規格】{model_name}"]
-            doc_search_lines = [f"【產品完整規格】{model_name}"]
+            doc_display_lines = [f"【型號完整規格】{model_name}"]
+            doc_search_lines = [f"【型號完整規格】{model_name}"]
             
             for key, value in specs.items():
                 orig_v = str(value)
@@ -93,7 +97,7 @@ class AorusRetriever:
                 if key not in dimension_data:
                     dimension_data[key] = {'display': [], 'search': [], 'norm_key': norm_k}
                 
-                model_name = model_name.replace("AORUS MASTER 16 ", "")
+                #model_name = model_name.replace("AORUS MASTER 16 ", "")
                 dimension_data[key]['display'].append(f"{model_name}: {orig_v}")
                 dimension_data[key]['search'].append(f"{model_name}: {norm_v}")
                 
@@ -124,7 +128,7 @@ class AorusRetriever:
                 diff_metrics.append(key)
 
         # 組裝超級比較 Chunk
-        comparison_title = "【AORUS MASTER 16 (AM6H) 系列所有型號核心差異總覽】"
+        comparison_title = "【AORUS MASTER 16 系列所有型號差異總覽】"
         comparison_display = [comparison_title]
         comparison_search = [self.normalize_text(comparison_title)]
 
@@ -159,10 +163,10 @@ class AorusRetriever:
         self.index.add(np.array(embeddings).astype('float32'))
 
         # 2. 建立 BM25 關鍵字索引
-        tokenized_corpus = [list(jieba.cut(chunk)) for chunk in search_chunks]
+        tokenized_corpus = [list(jieba.cut(chunk.lower())) for chunk in search_chunks]
         self.bm25 = BM25Okapi(tokenized_corpus)
 
-    def retrieve(self, query, k=3):
+    def retrieve(self, query, k=3, distance_threshold=21):
         # 1. 查詢字串正規化 (讓同義詞對齊知識庫)
         norm_query = self.normalize_text(query)
         total_chunks = len(self.chunks)
@@ -176,11 +180,12 @@ class AorusRetriever:
         
         # 轉換成排名 (indices[0] 已經是由近到遠排序了)
         vector_ranks = {doc_idx: rank + 1 for rank, doc_idx in enumerate(indices[0])}
+        faiss_distances = {doc_idx: dist for dist, doc_idx in zip(distances[0], indices[0])}
 
         # =====================================
         # 🌟 檢索路線 B：BM25 Keyword Search
         # =====================================
-        tokenized_query = list(jieba.cut(norm_query))
+        tokenized_query = list(jieba.cut(norm_query.lower()))
         bm25_scores = self.bm25.get_scores(tokenized_query)
         
         # 分數由高到低排序，取得排名
@@ -204,6 +209,25 @@ class AorusRetriever:
         # 根據 RRF 分數進行最終排序
         final_ranking = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
         # 回傳 Top K 的 Chunk
+
+        filtered_chunks = []
+        for doc_idx, rrf_score in final_ranking:
+            chunk_distance = faiss_distances[doc_idx]
+            #print(chunk_distance)
+            #print(self.chunks[doc_idx][:100])
+            # 如果有設定門檻，且距離大於門檻，則捨棄該 chunk (L2 距離越小越好)
+            if distance_threshold is not None and chunk_distance > distance_threshold:
+                # print(f"[過濾] Chunk {doc_idx} 距離 {chunk_distance:.4f} > {distance_threshold}")
+                continue
+                
+            filtered_chunks.append(self.chunks[doc_idx])
+            
+            # 抓滿 k 個就停止
+            if len(filtered_chunks) == k:
+                break
+
+        if not filtered_chunks:
+            return []
         #print([self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]])
         return [self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]]
 

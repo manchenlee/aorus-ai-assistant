@@ -25,6 +25,13 @@ dependencies = [
     "trulens-providers-google>=2.7.0",
     "openpyxl>=3.1.5",
     "deepeval>=3.8.9",
+    "pandas>=2.3.3",
+    "numpy<2.0.0",
+    "tqdm>=4.67.3",
+    "rouge-score>=0.1.2",
+    "scikit-learn>=1.8.0",
+    "spacy>=3.7.0,<3.8.0",
+    "zh-core-web-trf",
 ]
 
 [[tool.uv.index]]
@@ -36,3 +43,4 @@ explicit = true
 torch = { index = "pytorch-cu121" }
 torchvision = { index = "pytorch-cu121" }
 torchaudio = { index = "pytorch-cu121" }
+zh-core-web-trf = { url = "https://github.com/explosion/spacy-models/releases/download/zh_core_web_trf-3.7.2/zh_core_web_trf-3.7.2-py3-none-any.whl" }

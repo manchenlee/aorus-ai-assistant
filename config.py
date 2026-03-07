@@ -27,6 +27,7 @@ class Config:
     TEST_DATA_PATH = os.getenv("TEST_DATA_PATH", "./data/test")
 
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+    HF_TOKEN = os.getenv("HF_TOKEN")
 
     # ==========================================
     # ⚙️ Model Config (模型生成參數)
@@ -42,3 +43,4 @@ class Config:
     WINDOW_SIZE = int(os.getenv("WINDOW_SIZE", "8"))
     LOOKAHEAD_SIZE = int(os.getenv("LOOKAHEAD_SIZE", "4"))
     MAX_CHARS = int(os.getenv("MAX_CHARS", "300"))
+    NUM_OF_NORMAL_Q = int(os.getenv("NUM_OF_NORMAL_Q"))
