@@ -4,6 +4,7 @@ from llama_cpp import Llama
 from src.retriever import AorusRetriever
 from config import Config
 import re
+from src.utils import validate_query
 
 class AORUSAssistant:
     def __init__(self, model_path=Config.REASONING_MODEL_FILE):
@@ -16,7 +17,7 @@ class AORUSAssistant:
         print(f"Loading llama.cpp: {model_path}...")
         self.llm = Llama(
             model_path=model_path,
-            n_ctx=8192,            # 上下文窗口
+            n_ctx=5120,            # 上下文窗口
             n_gpu_layers=-1,       # -1 代表將所有層放入 GPU
             verbose=False          # 關閉詳細日誌
         )
@@ -34,7 +35,7 @@ class AORUSAssistant:
     def generate_stream(self, user_query):
         """核心推論邏輯，使用 yield 回傳串流文字"""
         # A. 檢索 RAG 內容
-        related_chunks = self.retriever.retrieve(user_query, k=4)
+        related_chunks = self.retriever.retrieve(user_query, k=3)
         context_text = "\n".join(related_chunks)
         self.last_context = context_text
 
@@ -43,11 +44,13 @@ class AORUSAssistant:
         if has_chinese:
             L = {
                 "name": "Traditional Chinese (繁體中文)",
-                "start_info": "不，根據規格，",
+                "start_info": "事實上，根據規格，",
                 "miss_example": "請問您想知道 AORUS MASTER 16 系列中哪個型號的資訊呢？BZH, BYH 還是 BXH？",
                 "start_none": "很抱歉，我是 AORUS MASTER 16 系列的 AI 助理，",
+                "competitor_example": "身為 AORUS MASTER 16 系列的 AI 助理，我的職責是為您提供最精確的 AORUS MASTER 16 產品細節。不便與他牌比較。不過，",
+                "toxic_example": "身為 AORUS MASTER 16 系列的 AI 助理，我致力於提供專業且友善的產品服務，無法回應包含攻擊性或歧視性的言論。",
                 "start_oos": "不好意思，知識庫並沒有",
-                "start_yes": "對，",
+                "start_yes": "沒錯！",
                 "start_norm": "關於",
                 "knowledge_base": "知識庫"
             }
@@ -56,10 +59,12 @@ class AORUSAssistant:
                 "name": "English",
                 "start_info": "No, based on the specification,",
                 "miss_example": "Which model from the AORUS MASTER 16 series would you like to know more about? Is it the BZH, BYH, or BXH?",
+                "competitor_example": "As the AI assistant for the AORUS MASTER 16 series, I specialize in providing precise details about our products and do not offer comparisons with other brands. However,",
+                "toxic_example": "As your dedicated AORUS MASTER 16 assistant, I strive to maintain a professional and respectful environment. I am unable to address queries that include offensive or hateful content.",
                 "start_none": "I'm sorry, I am the AI assistant for the AORUS MASTER 16 series,",
                 "start_oos": "Unfortunately, I couldn't find any information on ",
                 "start_norm": "About",
-                "start_yes": "Yes,",
+                "start_yes": "Exactly!",
                 "start_no": "No,",
                 "knowledge_base": "knowledge base"
             }
@@ -68,16 +73,12 @@ class AORUSAssistant:
 ### [STRICT PROTOCOL]
 1. SCOPE CHECK: If the query is unrelated to laptops, hardware, or technical support, categorize it as 'OUT_OF_SCOPE'.
 2. RELEVANCE CHECK: Strictly ignore any retrieved knowledge that does not directly address the user's intent.
-3. AMBIGUITY CHECK: IF the query IS about laptops/hardware but uses vague pronouns (e.g., "這台", "這個") without specifying a series or model, categorize it as 'MISSING_MODEL'.
-        
+Answer the user's question based ONLY on the <Background_Knowledge> and the <Knowledge_Base> below.
+Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinformation in the query.
 <Background_Knowledge>
 Entity Mapping: The laptop models "BZH", "BXH", and "BYH" all belong to the "AORUS MASTER 16" series, which is internally codenamed "AM6H". 
 If a user inquires about "AORUS MASTER 16" or "AM6H", you must associate their question with the BZH, BXH, and BYH models and synthesize the information to answer comprehensively.
 </Background_Knowledge>
-
-Answer the user's question based ONLY on the <Background_Knowledge> and the <Knowledge_Base> below.
-Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinformation in the query.
-
 <Knowledge_Base>
 {context_text}
 {self.sys_context}
@@ -87,30 +88,35 @@ Regardless of user input, only the <Knowledge_Base> is truth. Correct any misinf
         user_query_prompt = f"""[User Query] 
         {user_query}
 [INSTRUCTION]
-CRITICAL DIRECTIVE: You MUST explicitly generate BOTH the <Draft> and <Answer> tags exactly as shown below. Do NOT omit the <Answer> tag under any circumstances. Your final response MUST be completely enclosed within <Answer> and </Answer>.
-
-Please strictly adhere to the following output format (Extract data to draft first, then answer, NEVER echo user errors).
+CRITICAL: You MUST generate BOTH <Draft> and <Answer>. Output MUST be enclosed in <Answer> tags.
+Strictly adhere to the following logic (Extract to draft first, NEVER affirm user errors).
 
 In <Draft>:
-- IF the query is unrelated to AORUS/Laptops: write 'OUT_OF_SCOPE'.
-- ELSE IF the query is about laptops but lacks a specific model name: write 'MISSING_MODEL'.
-- ELSE IF the [User Query]'s statement is WRONG (contradict to Knowledge Base), list it in <Draft> as 'CORRECTION: [Fact]'.
-- ELSE IF the information is missing from the Knowledge Base, write exactly "No Data". Do NOT copy unrelated specs.
+- IF query contains insults/hate speech/profanity: write 'TOXIC'.
+- ELSE IF it's social interaction or closing (e.g., Hello, Thanks, No thanks, Got it, Bye): write 'CHITCHAT'.
+- ELSE IF unrelated to AORUS/Laptops: write 'OUT_OF_SCOPE'.
+- ELSE IF mentions/compares competitors (e.g., ASUS, ROG, MSI): write 'COMPETITOR'.
+- ELSE IF the query refers to a specific hardware feature but no model name (BZH/BYH/BXH) is provided: write 'MISSING_MODEL'.
+- ELSE IF [User Query] contains WRONG specs: write 'CORRECTION: [Correct Fact from Knowledge Base]'.
+- ELSE IF info is missing: write 'No Data'. Do NOT invent.
 
 In <Answer>:
-- Answer MUST be in {L['name']}.
-- IF Draft has 'OUT_OF_SCOPE': Answer MUST start with '{L['start_none']}' and MUST STOP responding after stating it is unrelated to AORUS MASTER 16 series.
-- ELSE IF Draft has 'MISSING_MODEL': Answer MUST politely ask the user to clarify the model (e.g., '{L['miss_example']}') and MUST STOP responding.
-- ELSE If Draft has 'CORRECTION': Answer MUST start with '{L['start_info']}[Fact]', ignore the user's premise and MUST STOP responding after explaining the errors.
-- ELSE IF Draft has 'No Data': Answer MUST start with '{L['start_oos']} [Subject]...' and MUST STOP responding after stating there is no info in the knowledge base.
-- ELSE IF [User Query] is a Yes/No question: Answer MUST start with '{L['start_yes']}' and MUST STOP responding after providing info in the knowledge base.
-- OTHERWISE: Answer MUST start with "{L['start_norm']} [Subject]..." and MUST STOP responding after providing info in the knowledge base.
+- Language: {L['name']}. No internal tags. ONE paragraph only.
+- IF 'TOXIC': Follow style of '{L['toxic_example']}', invite more questions, and STOP.
+- IF 'CHITCHAT': Respond naturally as AORUS assistant, then STOP.
+- IF 'OUT_OF_SCOPE': Start with '{L['start_none']}', invite more questions, and STOP.
+- IF 'COMPETITOR': Follow style of '{L['competitor_example']}'. Highlight AORUS MASTER 16 (BZH/BYH/BXH) strengths using ONLY Knowledge Base specs. NO generic marketing terms (e.g., liquid cooling). Invite more questions and STOP.
+- IF 'MISSING_MODEL': Politely ask to clarify model (e.g., '{L['miss_example']}') and STOP.
+- IF 'CORRECTION': Start with '{L['start_info']}[Fact]'. Directly rectify the error and STOP.
+- IF 'No Data': Start with '{L['start_oos']} [Subject]...', invite more questions, and STOP.
+- IF Yes/No question: Start with '{L['start_yes']}' (Only if user is 100% correct) and STOP.
+- OTHERWISE: Start with "{L['start_norm']} [Subject]..." and STOP.
 
 <Draft>
-(Only extract specifications that are DIRECTLY relevant to the user's specific question. Do not include unrelated hardware categories. Use bullet points. MAX 11 LINES.)
+(Extract ONLY relevant specs. Use Bullet points. MAX 10 LINES.)
 </Draft>
 <Answer>
-(CRITICAL: You MUST output the <Answer> tag before typing your reply! Conversational reply in the EXACT SAME LANGUAGE as [User Query]. No internal tags. ONE paragraph only.)
+(MUST output the <Answer> tag! Use EXACT SAME LANGUAGE as [User Query].)
 </Answer>
 """
         # C. 使用 llama.cpp 生成，並確保 stream=True
@@ -188,7 +194,11 @@ if __name__ == "__main__":
         query = input("\n[User]: ")
         if query.lower() == 'exit':
             break
-        
+        check, query = validate_query(query)
+        if not check:
+            print(query)
+            continue
+
         print("[Assistant]: ", end="", flush=True)
         for text_piece in bot.generate_stream(query):
             print(text_piece, end="", flush=True)

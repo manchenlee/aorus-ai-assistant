@@ -29,5 +29,6 @@
     "LAN (有線網路)": ["LAN", "有線網路", "網卡", "網路孔", "Ethernet", "RJ45"],
     "螢幕 (Screen/Display)": ["螢幕", "屏幕", "Screen", "Display", "Panel", "面板", "monitor"],
     "OLED (OLED面板)": ["OLED", "OLED面板", "發色"],
-    "2560×1600 (2K/2.5K解析度)": ["2560×1600", "2K", "2.5K", "2K解析度", "2.5K解析度", "畫質", "resolution", "QHD", "WQXGA"]
+    "2560×1600 (2K/2.5K解析度)": ["2560×1600", "2K", "2.5K", "2K解析度", "2.5K解析度", "畫質", "resolution", "QHD", "WQXGA"],
+    "AORUS MASTER 16": ["AM6H", "AORUS MASTER", "am6h", "aorus", "aorus master"]
 }

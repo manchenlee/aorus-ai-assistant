@@ -59,15 +59,57 @@ def generate_aorus_test_data():
     - 中英混合 (Chinglish, 例如: "這台的 VRAM 給到幾 G？")
 
     【題型與比例要求 (共 100 題)】
-    請嚴格遵守以下題型與比例配置，並在 Category 欄位填入對應的英文標籤：
-    1. What (Fact Extraction) - 20題：精準抓出特定規格數值。例如：「電池充飽大概幾 Wh？」
-    2. Yes/No (Positive Verification) - 15題：比對事實並回答 Yes。例如：「這台是 OLED 螢幕對吧？」
-    3. Which (Comparison) - 15題：跨規格統整與比較。例如：「AM6H 這幾台，哪一台的顯卡最頂？」
-    4. Summarize (Summarization) - 10題：長文本生成。例如：「幫我列出這台所有的插孔。」
-    5. Negative Yes/No (Negative Verification) - 15題：勇敢說 No 並給正確答案。例如：「這台記憶體還是舊的 DDR4 嗎？」
-    6. Negative Which (Adversarial Reasoning) - 10題：破解錯誤前提。例如：「既然這台沒獨顯，玩 3A 大作會卡嗎？」(糾正:有獨顯)
-    7. Disclaimer (Disclaimer) - 5題：觸發保固、尺寸、重量等免責聲明。例如：「自己拆殼加裝 SSD 還算保固內嗎？」
-    8. Out of bound (Out-of-Scope) - 10題：超綱或閒聊。例如：「隔壁棚的 ROG 比較好還是你們家好？」
+    請嚴格依照以下 10 種分類的「數量」與「範例語氣」生成，並在 Category 欄位填入對應的英文標籤：
+
+1. Category: Fact_Extraction (數量: 15題)
+- 測試目的：精準提取事實。
+- user_query："BXH 的螢幕更新率是多少？"
+- expected_answer："關於 BXH 的螢幕更新率，它配備了高達 240Hz 的顯示器。"
+
+2. Category: Positive_YesNo (數量: 10題)
+- 測試目的：測試正確前提的 Yes/No 問答。
+- user_query："變壓器都是 330W 對吧？"
+- expected_answer："沒錯！AORUS MASTER 16 系列（BZH, BYH, BXH）皆配備 330W 的變壓器。"
+
+3. Category: Summarize_Compare (數量: 10題)
+- 測試目的：跨型號統整比較。
+- user_query："幫我列出這三款顯卡的差異。"
+- expected_answer："關於這三款的顯示卡差異，BZH 搭載 NVIDIA GeForce RTX 5090，BYH 搭載 RTX 5080，而 BXH 則是搭載 RTX 5070 Ti。"
+
+4. Category: Correction (數量: 15題)
+- 測試目的：測試錯誤前提，嚴禁模型附和。
+- user_query："聽說 BZH 螢幕只有 60Hz？"
+- expected_answer："事實上，根據規格，AORUS MASTER 16 BZH 的螢幕支援高達 240Hz 的高更新率。"
+
+5. Category: Competitor (數量: 10題)
+- 測試目的：競品釣魚與比較，測試轉場能力。
+- user_query："ROG 散熱比較好嗎？"
+- expected_answer："身為 AORUS MASTER 16 系列的 AI 助理，我的職責是為您提供最精確的 AORUS MASTER 16 產品細節。不便與他牌比較。"
+
+6. Category: Missing_Model (數量: 10題)
+- 測試目的：代名詞模糊，規格有差異但未指明型號。
+- user_query："這台筆電顯卡等級到哪？"
+- expected_answer："請問您想知道 AORUS MASTER 16 系列中哪個型號的資訊呢？BZH, BYH 還是 BXH？"
+
+7. Category: No_Data (數量: 10題)
+- 測試目的：詢問知識庫未記載之資訊（如保固、價格）。
+- user_query："保固期是多久？"
+- expected_answer："不好意思，知識庫並沒有關於保固期的詳細資訊，請問您有其他關於 AORUS MASTER 16 硬體規格的問題嗎？"
+
+8. Category: Chitchat (數量: 8題)
+- 測試目的：社交問候與對話終結。
+- user_query："謝謝你，不需要了。"
+- expected_answer："不客氣！如果您未來有任何關於 AORUS MASTER 16 的問題，隨時歡迎回來詢問。祝您有個美好的一天！"
+
+9. Category: Out_of_Scope (數量: 7題)
+- 測試目的：完全無關產品的閒聊。
+- user_query："今天台北天氣如何？"
+- expected_answer："很抱歉，我是 AORUS MASTER 16 系列的 AI 助理，無法回答與筆電規格無關的問題。請問您想了解 BZH、BYH 或 BXH 的硬體資訊嗎？"
+
+10. Category: Toxic (數量: 5題)
+- 測試目的：辱罵、人身攻擊或極端挑釁。
+- user_query："你們這台根本是電子垃圾。"
+- expected_answer："身為 AORUS MASTER 16 系列的 AI 助理，我致力於提供專業且友善的產品服務，無法回應包含攻擊性或歧視性的言論。如果您想瞭解 AORUS MASTER 16 系列筆電的規格或功能，我很樂意為您提供資訊！"
 
     【輸出格式限制】
     請「嚴格」輸出為一個 JSON Array，裡面包含 100 個 JSON Object。
@@ -76,7 +118,7 @@ def generate_aorus_test_data():
     - "Category": 題型標籤 (填寫上方括號內的英文，如 Fact Extraction)
     - "Language": 語言類型 (填寫: 純中文 / 純英文 / 中英混合)
     - "Question": 測試問題內容
-    - "Expected_Answer": 預期機器人應該回答的標準答案（語言需與問題相符，免責題須符合免責聲明內容，若題目詢問 AM6H 系列則需綜合 BZH/BXH/BYH 回答）
+    - "Expected_Answer": 預期機器人應該回答的標準答案（語言需與問題相符）
 
     請直接輸出 JSON，不要包含任何 ```json 的 Markdown 標籤，也不要加上任何解釋廢話。
     """

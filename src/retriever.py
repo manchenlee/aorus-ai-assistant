@@ -7,6 +7,7 @@ import jieba
 from rank_bm25 import BM25Okapi
 import re
 from config import Config
+from src.utils import validate_query
 
 os.makedirs(Config.EMBEDDING_MODEL_PATH, exist_ok=True)
 
@@ -92,6 +93,7 @@ class AorusRetriever:
                 if key not in dimension_data:
                     dimension_data[key] = {'display': [], 'search': [], 'norm_key': norm_k}
                 
+                model_name = model_name.replace("AORUS MASTER 16 ", "")
                 dimension_data[key]['display'].append(f"{model_name}: {orig_v}")
                 dimension_data[key]['search'].append(f"{model_name}: {norm_v}")
                 
@@ -102,14 +104,53 @@ class AorusRetriever:
         # 第二階段：組裝【維度比較】 (橫向策略)
         # ==========================================
         for key, dim_dict in dimension_data.items():
-            disp_chunk = "\n".join([f"【{dim_dict['norm_key']} 規格比較】"] + dim_dict['display'])
+            disp_chunk = "\n".join([f"【{dim_dict['norm_key']}比較】"] + dim_dict['display'])
             self.chunks.append(disp_chunk)
             
-            srch_chunk = "\n".join([f"【{dim_dict['norm_key']} 規格比較】"] + dim_dict['search'])
+            srch_chunk = "\n".join([f"【{dim_dict['norm_key']}比較】"] + dim_dict['search'])
             search_chunks.append(srch_chunk)
 
         # ==========================================
-        # 第三階段：建立索引 (🌟 注意！這裡只使用 search_chunks)
+        # 第三階段：自動化【型號差異分析】超級 Chunk
+        # ==========================================
+        diff_metrics = []
+        
+        for key, dim_dict in dimension_data.items():
+            # 利用 set 找出該規格在所有型號中，共有幾種不同的數值
+            # 去除重複後，如果長度 > 1，代表這個規格「有差異」
+            unique_values = set(self.normalize_text(str(v)) for v in dim_dict['display'])
+            
+            if len(unique_values) > 1:
+                diff_metrics.append(key)
+
+        # 組裝超級比較 Chunk
+        comparison_title = "【AORUS MASTER 16 (AM6H) 系列所有型號核心差異總覽】"
+        comparison_display = [comparison_title]
+        comparison_search = [self.normalize_text(comparison_title)]
+
+        if diff_metrics:
+            for model_name in data.keys():
+                model_diff_info = [f"● 型號: {model_name}"]
+                for metric in diff_metrics:
+                    # 從原始 data 中抓取該型號對應的差異數值
+                    val = data[model_name].get(metric, "N/A")
+                    model_diff_info.append(f"  - {metric}: {val}")
+                
+                info_str = "\n".join(model_diff_info)
+                comparison_display.append(info_str)
+                comparison_search.append(self.normalize_text(info_str))
+        else:
+            comparison_display.append("此系列型號之核心規格基本一致。")
+
+        # 加入最終 Chunks
+        final_disp_chunk = "\n\n".join(comparison_display)
+        final_srch_chunk = "\n\n".join(comparison_search)
+        
+        self.chunks.append(final_disp_chunk)
+        search_chunks.append(final_srch_chunk)
+
+        # ==========================================
+        # 第四階段：建立索引
         # ==========================================
         # 1. 建立 FAISS 向量索引
         embeddings = self.model.encode(search_chunks)
@@ -163,6 +204,7 @@ class AorusRetriever:
         # 根據 RRF 分數進行最終排序
         final_ranking = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
         # 回傳 Top K 的 Chunk
+        #print([self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]])
         return [self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]]
 
 # 測試用
@@ -176,6 +218,10 @@ if __name__ == "__main__":
     ]
     
     for q in test_queries:
+        check, q = validate_query(q)
+        if not check :
+            print(q)
+            continue
         print(f"\n[問題]: {q}")
         results = retriever.retrieve(q, k=2)
         for i, r in enumerate(results):

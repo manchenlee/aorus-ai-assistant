@@ -41,3 +41,4 @@ class Config:
     # 滑動視窗參數，控制打字機流暢度與繁簡轉換的安全性
     WINDOW_SIZE = int(os.getenv("WINDOW_SIZE", "8"))
     LOOKAHEAD_SIZE = int(os.getenv("LOOKAHEAD_SIZE", "4"))
+    MAX_CHARS = int(os.getenv("MAX_CHARS", "300"))
