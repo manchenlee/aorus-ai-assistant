@@ -191,7 +191,9 @@ In <Answer>:
 # --- 單機簡單測試區 ---
 if __name__ == "__main__":
     bot = AORUSAssistant()
-    print("\nAORUS AI Assistant is Online! (type \'exit\' to exit.)")
+    print("=" * 50)
+    print("\nAORUS AI 助理上線中！ AORUS AI Assistant is Online! (type \'exit\' to exit.)")
+    print("=" * 50)
     while True:
         query = input("\n[User]: ")
         if query.lower() == 'exit':

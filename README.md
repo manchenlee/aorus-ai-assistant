@@ -32,7 +32,7 @@ uv run -m scripts.setup_models
 
 ```
 
-### Running the AI Assistant
+### Run AORUS AI Assistant!
 
 Execute the command below to start the interactive CLI and chat with the AORUS AI Assistant in real-time. Type `exit` to quit the application.
 
