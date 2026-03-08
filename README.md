@@ -43,7 +43,7 @@ uv run -m src.main
 
 ### Synthetic Data Generation
 
-Use the `gemini-2.5-flash` model to generate synthetic evaluation data. Before running this script, please make sure to insert your Gemini API key into the `.env` file (e.g., `GEMINI_API_KEY=your_api_key_here`).
+Use the `gemini-2.5-flash` model to generate synthetic evaluation data `test_cases.csv`. Before running this script, please make sure to insert your Gemini API key into the `.env` file (e.g., `GEMINI_API_KEY=your_api_key_here`).
 
 ```bash
 uv run -m scripts.gen_test_data
@@ -61,7 +61,7 @@ uv run -m src.evaluate --eval_mode nonllm --stage <stage_to_start> --res <st1_re
 
 ```
 
-*(Example: `uv run -m src.evaluate --eval_mode nonllm --stage st2 --res aorus_test_results_20260307.jsonl`)*
+*(Example: `uv run -m src.evaluate --eval_mode nonllm --stage st2 --res results_20260307.jsonl`)*
 
 ---
 

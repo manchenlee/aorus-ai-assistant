@@ -516,8 +516,8 @@ if __name__ == "__main__":
 
     timestamp = time.strftime("%Y%m%d_%H%M%S")
     input_csv = os.path.join(Config.TEST_DATA_PATH, "test_cases.csv")
-    output_jsonl = os.path.join(Config.TEST_DATA_PATH, f"test_results_{timestamp}.jsonl")
-    log = os.path.join(Config.TEST_DATA_PATH, f"test_log_{timestamp}.txt")
+    output_jsonl = os.path.join(Config.TEST_DATA_PATH, f"results_{timestamp}.jsonl")
+    log = os.path.join(Config.TEST_DATA_PATH, f"log_{timestamp}.txt")
 
     a = parser.parse_args()
 
@@ -531,6 +531,10 @@ if __name__ == "__main__":
         if a.stage == "st2":
             assert a.res != ""
             output_jsonl = os.path.join(Config.TEST_DATA_PATH, a.res)
+            temp = re.split('[_.]', a.res)
+            log_name = 'log_' + temp[1] + temp[2] + '.txt'
+            print(log_name)
+            log = os.path.join(Config.TEST_DATA_PATH, log_name)
         if a.eval_mode == 'llm':
             run_evaluation_stage_llm(output_jsonl, log)
         elif a.eval_mode == 'nonllm':

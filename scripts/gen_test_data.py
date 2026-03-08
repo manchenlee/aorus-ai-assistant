@@ -141,7 +141,7 @@ def generate_aorus_test_data():
         # 確保儲存的路徑存在
         os.makedirs(Config.TEST_DATA_PATH, exist_ok=True)
         # 這次我們存成 CSV 檔案
-        output_file = os.path.join(Config.TEST_DATA_PATH, "aorus_test_cases.csv")
+        output_file = os.path.join(Config.TEST_DATA_PATH, "test_cases.csv")
 
         # 將 JSON 資料寫入 CSV
         # 💡 使用 utf-8-sig 讓 Excel 打開時不會變成亂碼
