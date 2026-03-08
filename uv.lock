@@ -186,7 +186,9 @@ dependencies = [
     { name = "bs4" },
     { name = "deepeval" },
     { name = "faiss-cpu" },
+    { name = "google" },
     { name = "google-genai" },
+    { name = "huggingface-hub" },
     { name = "jieba" },
     { name = "jinja2" },
     { name = "llama-cpp-python" },
@@ -202,6 +204,7 @@ dependencies = [
     { name = "requests" },
     { name = "rouge-score" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "sentence-transformers" },
     { name = "spacy" },
     { name = "torch" },
@@ -216,7 +219,9 @@ requires-dist = [
     { name = "bs4", specifier = ">=0.0.2" },
     { name = "deepeval", specifier = ">=3.8.9" },
     { name = "faiss-cpu", specifier = ">=1.13.2" },
+    { name = "google", specifier = ">=3.0.0" },
     { name = "google-genai", specifier = ">=1.66.0" },
+    { name = "huggingface-hub", specifier = ">=1.5.0" },
     { name = "jieba", specifier = ">=0.42.1" },
     { name = "jinja2" },
     { name = "llama-cpp-python", specifier = ">=0.3.16" },
@@ -232,6 +237,7 @@ requires-dist = [
     { name = "requests", specifier = ">=2.32.5" },
     { name = "rouge-score", specifier = ">=0.1.2" },
     { name = "scikit-learn", specifier = ">=1.8.0" },
+    { name = "scipy", specifier = ">=1.17.1" },
     { name = "sentence-transformers", specifier = ">=5.2.3" },
     { name = "spacy", specifier = ">=3.7.0,<3.8.0" },
     { name = "torch", specifier = ">=2.5.1", index = "https://download.pytorch.org/whl/cu121" },
@@ -878,6 +884,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b6/27/954057b0d1f53f086f681755207dda6de6c660ce133c829158e8e8fe7895/fsspec-2025.12.0.tar.gz", hash = "sha256:c505de011584597b1060ff778bb664c1bc022e87921b0e4f10cc9c44f9635973", size = 309748, upload-time = "2025-12-03T15:23:42.687Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/51/c7/b64cae5dba3a1b138d7123ec36bb5ccd39d39939f18454407e5468f4763f/fsspec-2025.12.0-py3-none-any.whl", hash = "sha256:8bf1fe301b7d8acfa6e8571e3b1c3d158f909666642431cc78a1b7b4dbc5ec5b", size = 201422, upload-time = "2025-12-03T15:23:41.434Z" },
+]
+
+[[package]]
+name = "google"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beautifulsoup4" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/89/97/b49c69893cddea912c7a660a4b6102c6b02cd268f8c7162dd70b7c16f753/google-3.0.0.tar.gz", hash = "sha256:143530122ee5130509ad5e989f0512f7cb218b2d4eddbafbad40fd10e8d8ccbe", size = 44978, upload-time = "2020-07-11T14:50:45.678Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ac/35/17c9141c4ae21e9a29a43acdfd848e3e468a810517f862cad07977bf8fe9/google-3.0.0-py2.py3-none-any.whl", hash = "sha256:889cf695f84e4ae2c55fbc0cfdaf4c1e729417fa52ab1db0485202ba173e4935", size = 45258, upload-time = "2020-07-11T14:49:58.287Z" },
 ]
 
 [[package]]
