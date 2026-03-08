@@ -120,8 +120,6 @@ class AorusRetriever:
         diff_metrics = []
         
         for key, dim_dict in dimension_data.items():
-            # 利用 set 找出該規格在所有型號中，共有幾種不同的數值
-            # 去除重複後，如果長度 > 1，代表這個規格「有差異」
             unique_values = set(self.normalize_text(str(v)) for v in dim_dict['display'])
             
             if len(unique_values) > 1:
@@ -213,22 +211,16 @@ class AorusRetriever:
         filtered_chunks = []
         for doc_idx, rrf_score in final_ranking:
             chunk_distance = faiss_distances[doc_idx]
-            #print(chunk_distance)
-            #print(self.chunks[doc_idx][:100])
-            # 如果有設定門檻，且距離大於門檻，則捨棄該 chunk (L2 距離越小越好)
             if distance_threshold is not None and chunk_distance > distance_threshold:
-                # print(f"[過濾] Chunk {doc_idx} 距離 {chunk_distance:.4f} > {distance_threshold}")
                 continue
                 
             filtered_chunks.append(self.chunks[doc_idx])
             
-            # 抓滿 k 個就停止
             if len(filtered_chunks) == k:
                 break
 
         if not filtered_chunks:
             return []
-        #print([self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]])
         return [self.chunks[doc_idx] for doc_idx, score in final_ranking[:k]]
 
 # 測試用
