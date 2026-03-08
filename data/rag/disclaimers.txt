@@ -4,7 +4,6 @@ Reference the following disclaimers ONLY if the specific hardware is mentioned i
 - 尺寸: *The dimensions of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
 - 重量: *The weight of the laptop may vary according to the configuration, manufacturing process and measurement method, please refer to the actual situation.
 - 顯示晶片: *May vary by scenario
-
 [GENERAL DISCLAIMERS]
 - * HDMI、HDMI High-Definition Multimedia Interface、HDMI 商業外觀及 HDMI 識別標章等詞彙均為 HDMI Licensing Administrator, Inc. 的商標或註冊商標。
 - * 1升級時機會依裝置而有所不同。功能和應用程式可用性會依地區而有所不同。某些功能需要特定硬體 (請參閱https://www.microsoft.com/zh-tw/windows/windows-11-specifications)。

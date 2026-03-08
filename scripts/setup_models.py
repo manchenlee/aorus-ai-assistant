@@ -10,7 +10,7 @@ def setup(download_judge=False):
     os.makedirs(Config.EMBEDDING_MODEL_PATH, exist_ok=True)
 
     print("="*40)
-    print("🚀 AORUS Assistant Setup Process")
+    print("AORUS Assistant Setup Process")
     print("="*40)
 
     # ==========================================
@@ -18,9 +18,9 @@ def setup(download_judge=False):
     # ==========================================
     reasoning_model_name = os.path.basename(Config.REASONING_MODEL_FILE)
     if os.path.exists(Config.REASONING_MODEL_FILE):
-        print(f"✅ [1/3] Reasoning Model: {reasoning_model_name} exists.")
+        print(f"[1/3] Reasoning Model: {reasoning_model_name} exists.")
     else:
-        print(f"📥 [1/3] Downloading Reasoning Model ({reasoning_model_name})...")
+        print(f"[1/3] Downloading Reasoning Model ({reasoning_model_name})...")
         hf_hub_download(
             repo_id=Config.REASONING_MODEL_REPO_ID,
             filename=reasoning_model_name,
@@ -34,30 +34,30 @@ def setup(download_judge=False):
         os.makedirs(Config.JUDGE_MODEL_PATH, exist_ok=True)
         judge_model_name = os.path.basename(Config.JUDGE_MODEL_FILE)
         if os.path.exists(Config.JUDGE_MODEL_FILE):
-            print(f"✅ [2/3] Judge Model: {judge_model_name} exists.")
+            print(f"[2/3] Judge Model: {judge_model_name} exists.")
         else:
-            print(f"📥 [2/3] Downloading Judge Model ({judge_model_name})...")
+            print(f"[2/3] Downloading Judge Model ({judge_model_name})...")
             hf_hub_download(
                 repo_id=Config.JUDGE_MODEL_REPO_ID,
                 filename=judge_model_name,
                 local_dir=Config.JUDGE_MODEL_PATH
             )
     else:
-        print("⏭️  [2/3] Judge Model: Download skipped (Use --download_judge to enable).")
+        print("[2/3] Judge Model: Download skipped (Use --download_judge to enable).")
 
     # ==========================================
     # 3. 下載 Embedding 模型 (RAG 檢索用)
     # ==========================================
     embedding_config_path = os.path.join(Config.EMBEDDING_MODEL_PATH, "config.json")
     if os.path.exists(embedding_config_path):
-        print("✅ [3/3] Embedding Model: Already exists.")
+        print("[3/3] Embedding Model: Already exists.")
     else:
-        print("📥 [3/3] Downloading Multilingual MiniLM...")
+        print("[3/3] Downloading Multilingual MiniLM...")
         model = SentenceTransformer(Config.EMBEDDING_MODEL_NAME)
         model.save(Config.EMBEDDING_MODEL_PATH)
 
     print("\n" + "="*40)
-    print("✨ Setup Completed.")
+    print("Setup Completed.")
     print(f"Models location: {os.path.abspath('./models/')}")
     print("="*40)
 

@@ -29,21 +29,22 @@ class VRAMMonitor:
         self.thread.start()
         print(f"🔍 VRAM Monitor started... (Baseline: {self.initial_vram_mb:.2f} MB)")
 
-    def stop(self):
+    def stop(self, log):
         self.is_running = False
         time.sleep(0.2) 
         
         net_usage_mb = self.peak_vram_mb - self.initial_vram_mb
         
-        print("\n" + "="*40)
-        print(f"📊 VRAM Usage Report")
-        print(f"   Baseline VRAM (System): {self.initial_vram_mb:.2f} MB")
-        print(f"   Peak VRAM (Total):     {self.peak_vram_mb:.2f} MB")
-        print(f"   Net Project Usage:     {net_usage_mb:.2f} MB") # 這是你的專案淨重
+        with open(log, "a", encoding="utf-8") as f:
+            print("\n" + "="*40, file=f)
+            print(f"VRAM Usage Report", file=f)
+            print(f"   Baseline VRAM (System): {self.initial_vram_mb:.2f} MB", file=f)
+            print(f"   Peak VRAM (Total):     {self.peak_vram_mb:.2f} MB", file=f)
+            print(f"   Net Project Usage:     {net_usage_mb:.2f} MB", file=f)
         
-        if net_usage_mb > self.limit_mb:
-            print(f"   🚨 WARNING: Project Net Usage exceeded {self.limit_mb} MB!")
-        else:
-            print(f"   ✅ PASS: Net Usage within {self.limit_mb} MB limit.")
-        print("="*40)
+            if net_usage_mb > self.limit_mb:
+                print(f"   WARNING: Project Net Usage exceeded {self.limit_mb} MB!", file=f)
+            else:
+                print(f"   PASS: Net Usage within {self.limit_mb} MB limit.", file=f)
+            print("="*40)
         pynvml.nvmlShutdown()

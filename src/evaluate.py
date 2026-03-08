@@ -26,6 +26,11 @@ from src.utils import validate_query
 import asyncio
 import spacy
 
+os.environ["HF_TOKEN"] = Config.HF_TOKEN
+model_embed = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+model_nli = CrossEncoder('MoritzLaurer/mDeBERTa-v3-base-mnli-xnli')
+model_rel = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+
 monitor = VRAMMonitor()
 monitor.start()
 
@@ -45,7 +50,6 @@ class PrometheusJudge(DeepEvalBaseLLM):
 
     def generate(self, prompt: str) -> str:
         llm = self.load_model()
-        # Prometheus 需要輸出評分與推理過程，max_tokens 不能太少
         response = llm(prompt, max_tokens=512, stop=["</s>"])
         return response["choices"][0]["text"].strip()
 
@@ -60,7 +64,7 @@ def parse_prometheus_result(raw_output):
     解析 Prometheus 格式，並回傳 (score, feedback)
     """
     score = 0.0
-    feedback = "解析失敗"
+    feedback = "Parsing failed"
     
     try:
         # 1. 先處理 Feedback：抓取 [RESULT] 之前的所有內容
@@ -89,13 +93,8 @@ def parse_prometheus_result(raw_output):
         return score, feedback
 
     except Exception as e:
-        print(f"解析失敗: {e} | 原始輸出: {raw_output}")
-        return 0.0, "解析異常"
-
-os.environ["HF_TOKEN"] = Config.HF_TOKEN
-model_embed = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
-model_nli = CrossEncoder('MoritzLaurer/mDeBERTa-v3-base-mnli-xnli')
-model_rel = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+        print(f"Paring failed: {e} | Original output: {raw_output}")
+        return 0.0, "Parsing Error"
 
 def get_nli_entailment_score(context, actual_answer):
     """計算 Faithfulness (NLI 模型判定為 Entailment 的機率)"""
@@ -174,7 +173,7 @@ def get_cross_encoder_relevance(query, answer):
 # ==========================================
 # 階段一：生成與效能測試
 # ==========================================
-def run_generation_stage(input_csv, output_jsonl):
+def run_generation_stage(input_csv, output_jsonl, log):
     print("\n" + "="*40)
     print("Stage 1: Start generate and performance test")
     print("="*40)
@@ -259,13 +258,13 @@ def run_generation_stage(input_csv, output_jsonl):
     avg_tps = total_tps / record_count if record_count > 0 else 0.0
 
     print(f"Stage 1 completed. Files saved:\n- {output_jsonl}\n- {output_csv_stage1}")
-
-    print("=" * 50)
-    print(f"Performance Summary (Average of {record_count} queries):")
-    print("=" * 50)
-    print(f"   Avg TTFT: {avg_ttft:.3f} seconds")
-    print(f"   Avg TPS : {avg_tps:.2f} tokens/second")
-    print("=" * 50)
+    with open(log, "a", encoding="utf-8") as f:
+        print("=" * 50, file=f)
+        print(f"Performance Summary (Average of {record_count} queries):", file=f)
+        print("=" * 50, file=f)
+        print(f"   Avg TTFT: {avg_ttft:.3f} seconds", file=f)
+        print(f"   Avg TPS : {avg_tps:.2f} tokens/second", file=f)
+        print("=" * 50, file=f)
 
     # 🧹 物理級清空 VRAM 的關鍵步驟！
     print("Releasing VRAM...")
@@ -278,7 +277,7 @@ def run_generation_stage(input_csv, output_jsonl):
 # ==========================================
 # 階段二：DeepEval測試
 # ==========================================
-def run_evaluation_stage_llm(input_jsonl):
+def run_evaluation_stage_llm(input_jsonl, log):
     print("\n" + "="*40)
     print("Stage 2: Start Prometheus Offline Evaluation.")
     print("="*40)
@@ -287,8 +286,8 @@ def run_evaluation_stage_llm(input_jsonl):
         print(f"Can't find test_result file: {input_jsonl}")
         return
 
-    output_eval_csv = input_jsonl.replace(".jsonl", "_eval_score.csv")
-    output_feedback_csv = input_jsonl.replace(".jsonl", "_eval_feedback.csv")
+    output_eval_csv = input_jsonl.replace(".jsonl", "_eval_llm.csv")
+    output_feedback_csv = input_jsonl.replace(".jsonl", "_eval_llm_feedback.csv")
     
     judge_llm = PrometheusJudge(model_path=Config.JUDGE_MODEL_FILE)
     
@@ -372,7 +371,7 @@ def run_evaluation_stage_llm(input_jsonl):
 
     print(f"\nStage 2 (LLM) completed. Files saved:\n- {output_eval_csv}\n- {output_feedback_csv}")
 
-def run_evaluation_stage_nonllm(input_jsonl):
+def run_evaluation_stage_nonllm(input_jsonl, log):
     print("\n" + "="*40)
     print("Stage 2: Start non-LLM Offline Evaluation (via HF API).")
     print("="*40)
@@ -381,7 +380,7 @@ def run_evaluation_stage_nonllm(input_jsonl):
         print(f"Can't find test_result file: {input_jsonl}")
         return
     
-    output_eval_csv = input_jsonl.replace(".jsonl", "_eval.csv")
+    output_eval_csv = input_jsonl.replace(".jsonl", "_eval_nonllm.csv")
     eval_results = []
     
     # 初始化 ROUGE 評分器
@@ -477,16 +476,17 @@ def run_evaluation_stage_nonllm(input_jsonl):
             avg_relevance, 
             avg_robustness
         ],
-        #"Ideal Threshold": ["> 0.60", "> 0.75", "> 0.85", "> 0.80", "> 0.90"]
     }
     
     summary_df = pd.DataFrame(summary_data)
     
-    print("\n" + "="*50)
-    print("Evaluation Summary Report")
-    print("="*50)
-    print(summary_df.to_string(index=False))
-    print("="*50)
+    with open(log, "a", encoding="utf-8") as f:
+        print("\n" + "="*50, file=f)
+        print("Evaluation Summary Report", file=f)
+        print("="*50, file=f)
+        print(summary_df.to_string(index=False), file=f)
+        print("="*50, file=f)
+
 
     print(f"\nStage 2 (non-LLM) completed. Files saved:\n- {output_eval_csv}")
 
@@ -515,22 +515,23 @@ if __name__ == "__main__":
     )
 
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    input_csv = os.path.join(Config.TEST_DATA_PATH, "aorus_test_cases.csv")
-    output_jsonl = os.path.join(Config.TEST_DATA_PATH, f"aorus_test_results_{timestamp}.jsonl")
+    input_csv = os.path.join(Config.TEST_DATA_PATH, "test_cases.csv")
+    output_jsonl = os.path.join(Config.TEST_DATA_PATH, f"test_results_{timestamp}.jsonl")
+    log = os.path.join(Config.TEST_DATA_PATH, f"test_log_{timestamp}.txt")
 
     a = parser.parse_args()
 
     if a.stage in ["all", "st1"]:
         try:
-            run_generation_stage(input_csv, output_jsonl)
+            run_generation_stage(input_csv, output_jsonl, log)
         finally:
-            monitor.stop()
+            monitor.stop(log)
         
     if a.stage in ["all", "st2"]:
         if a.stage == "st2":
             assert a.res != ""
             output_jsonl = os.path.join(Config.TEST_DATA_PATH, a.res)
         if a.eval_mode == 'llm':
-            run_evaluation_stage_llm(output_jsonl)
+            run_evaluation_stage_llm(output_jsonl, log)
         elif a.eval_mode == 'nonllm':
-            run_evaluation_stage_nonllm(output_jsonl)
+            run_evaluation_stage_nonllm(output_jsonl, log)

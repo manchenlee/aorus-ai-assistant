@@ -1,7 +1,0 @@
-﻿id,query,expected_answer,actual_answer,ttft,tps,total_time
-1,AORUS MASTER 16 BZH 的顯示晶片是什麼？,AORUS MASTER 16 BZH 配備 NVIDIA® GeForce RTX™ 5090 Laptop GPU，擁有 24GB GDDR7 記憶體，以及 175W 的最大顯示功率。,"AORUS MASTER 16 BZH 的顯示晶片是 NVIDIA® GeForce RTX™ 5090 Laptop GPU，配備 24GB GDDR7 視訊記憶體，最大圖形功率為 175W（Dynamic Boost），AI Boost 頻率為 1797 MHz（1597 MHz Boost Clock + 200 MHz OC）。  
-",1.808,65.26,2.64
-2,What is the maximum memory capacity for the AM6H series?,"The AM6H series, which includes BZH, BYH, and BXH, supports up to 64GB DDR5 5600MHz memory, with 2 SO-DIMM sockets for expansion.","The maximum memory capacity for the AM6H series (AORUS MASTER 16 BZH, BYH, and BXH) is up to 64GB DDR5 5600MHz, with 2x SO-DIMM sockets for expansion. This capacity is consistent across all models in the series.  
-",1.839,84.31,2.54
-3,請問 BXH 的 GPU power consumption 是多少瓦？,BXH 的顯示晶片 NVIDIA® GeForce RTX™ 5070 Ti Laptop GPU 擁有 140W 的 Maximum Graphics Power with Dynamic Boost*。請注意，實際情況可能因情境而異。,"AORUS MASTER 16 BXH 的顯示晶片最大功耗為 140W。  
-",1.825,19.08,2.04

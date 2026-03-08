@@ -19,9 +19,8 @@ class AORUSAssistant:
             model_path=model_path,
             n_ctx=4500,
             n_gpu_layers=-1,
-            n_batch=128,
             flash_attn=True,
-            verbose=False
+            verbose=False,
         )
         
         # 3. 讀取動態免責聲明素材
@@ -37,7 +36,7 @@ class AORUSAssistant:
     def generate_stream(self, user_query):
         """核心推論邏輯，使用 yield 回傳串流文字"""
         # A. 檢索 RAG 內容
-        related_chunks = self.retriever.retrieve(user_query, k=2)
+        related_chunks = self.retriever.retrieve(user_query, k=3)
         context_text = "\n".join(related_chunks)
         self.last_context = context_text
 
@@ -49,7 +48,7 @@ class AORUSAssistant:
                 "start_info": "事實上，根據規格，",
                 "miss_example": "請問您想知道 AORUS MASTER 16 系列中哪個型號的資訊呢？BZH, BYH 還是 BXH？",
                 "start_none": "很抱歉，我是 AORUS MASTER 16 系列的 AI 助理，",
-                "competitor_example": "身為 AORUS MASTER 16 系列的 AI 助理，我的職責是提供 AORUS MASTER 16 的產品細節，不便與他牌比較。不過，",
+                "competitor_example": "身為 AORUS MASTER 16 系列的 AI 助理，我的職責是提供 AORUS MASTER 16 的產品細節，故不便與他牌比較。不過，",
                 "toxic_example": "身為 AORUS MASTER 16 系列的 AI 助理，我致力於提供專業且友善的產品服務，無法回應包含攻擊性或歧視性的言論。",
                 "start_oos": "不好意思，知識庫並沒有",
                 "start_yes": "沒錯！",
@@ -85,7 +84,7 @@ If a user inquires about "AORUS MASTER 16" or "AM6H", you must associate their q
 {self.sys_context}
 </Knowledge_Base>
 """
-
+#{self.sys_context}
         user_query_prompt = f"""[User Query] 
         {user_query}
 [INSTRUCTION]

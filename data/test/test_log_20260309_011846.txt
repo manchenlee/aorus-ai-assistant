@@ -1,0 +1,25 @@
+==================================================
+Performance Summary (Average of 100 queries):
+==================================================
+   Avg TTFT: 1.556 seconds
+   Avg TPS : 85.14 tokens/second
+==================================================
+
+========================================
+VRAM Usage Report
+   Baseline VRAM (System): 3838.94 MB
+   Peak VRAM (Total):     7329.31 MB
+   Net Project Usage:     3490.38 MB
+   PASS: Net Usage within 4096 MB limit.
+
+==================================================
+Evaluation Summary Report
+==================================================
+              Metric Category   Target  Average Score
+        Correctness (ROUGE-L)   Normal       0.670416
+   Correctness (Semantic Sim)   Normal       0.883442
+           Faithfulness (NLI)   Normal       0.523678
+Faithfulness (Entity Overlap)   Normal       0.860944
+    Relevance (Cross-Encoder)   Normal       0.957990
+         Robustness (Refusal) Abnormal       0.730982
+==================================================

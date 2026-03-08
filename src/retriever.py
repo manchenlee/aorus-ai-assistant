@@ -82,8 +82,8 @@ class AorusRetriever:
         # 第一階段：組裝【產品完整規格】
         # ==========================================
         for model_name, specs in data.items():
-            doc_display_lines = [f"型號完整規格 {model_name}"]
-            doc_search_lines = [f"型號完整規格 {model_name}"]
+            doc_display_lines = [f"[型號完整規格 {model_name}]"]
+            doc_search_lines = [f"[型號完整規格 {model_name}]"]
             
             for key, value in specs.items():
                 orig_v = str(value)
@@ -108,10 +108,10 @@ class AorusRetriever:
         # 第二階段：組裝【維度比較】 (橫向策略)
         # ==========================================
         for key, dim_dict in dimension_data.items():
-            disp_chunk = "\n".join([f"{dim_dict['norm_key']}比較"] + dim_dict['display'])
+            disp_chunk = "\n".join([f"[{dim_dict['norm_key']}比較]"] + dim_dict['display'])
             self.chunks.append(disp_chunk)
             
-            srch_chunk = "\n".join([f"{dim_dict['norm_key']}比較"] + dim_dict['search'])
+            srch_chunk = "\n".join([f"[{dim_dict['norm_key']}比較]"] + dim_dict['search'])
             search_chunks.append(srch_chunk)
 
         # ==========================================
@@ -120,19 +120,19 @@ class AorusRetriever:
         diff_metrics = []
         
         for key, dim_dict in dimension_data.items():
-            unique_values = set(self.normalize_text(str(v)) for v in dim_dict['display'])
+            unique_values = set(self.normalize_text(str(v).split('H:')[1]) for v in dim_dict['display'])
+            #print(unique_values)
             
             if len(unique_values) > 1:
                 diff_metrics.append(key)
 
-        # 組裝超級比較 Chunk
-        comparison_title = "AORUS MASTER 16 系列所有型號差異總覽"
+        comparison_title = "[AORUS MASTER 16 系列所有型號差異總覽]"
         comparison_display = [comparison_title]
         comparison_search = [self.normalize_text(comparison_title)]
 
         if diff_metrics:
             for model_name in data.keys():
-                model_diff_info = [f"● 型號: {model_name}"]
+                model_diff_info = [f"{model_name}"]
                 for metric in diff_metrics:
                     # 從原始 data 中抓取該型號對應的差異數值
                     val = data[model_name].get(metric, "N/A")
@@ -147,7 +147,7 @@ class AorusRetriever:
         # 加入最終 Chunks
         final_disp_chunk = "\n\n".join(comparison_display)
         final_srch_chunk = "\n\n".join(comparison_search)
-        
+        #print(final_disp_chunk)
         self.chunks.append(final_disp_chunk)
         search_chunks.append(final_srch_chunk)
 
@@ -210,6 +210,7 @@ class AorusRetriever:
 
         filtered_chunks = []
         for doc_idx, rrf_score in final_ranking:
+            #print(self.chunks[doc_idx])
             chunk_distance = faiss_distances[doc_idx]
             if distance_threshold is not None and chunk_distance > distance_threshold:
                 continue
@@ -238,7 +239,7 @@ if __name__ == "__main__":
         if not check :
             print(q)
             continue
-        print(f"\n[問題]: {q}")
-        results = retriever.retrieve(q, k=2)
+        print(f"\n[User]: {q}")
+        results = retriever.retrieve(q, k=3)
         for i, r in enumerate(results):
             print(f"-> Top {i+1}: {r[:50]}...") # 只印前50字觀察
