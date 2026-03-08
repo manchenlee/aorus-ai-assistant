@@ -192,7 +192,7 @@ In <Answer>:
 if __name__ == "__main__":
     bot = AORUSAssistant()
     print("=" * 50)
-    print("\nAORUS AI 助理上線中！ AORUS AI Assistant is Online! (type \'exit\' to exit.)")
+    print("\nAORUS AI 助理上線中！ AORUS AI Assistant is Online! (enter \'exit\' to exit.)")
     print("=" * 50)
     while True:
         query = input("\n[User]: ")
