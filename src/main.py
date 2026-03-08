@@ -17,9 +17,11 @@ class AORUSAssistant:
         print(f"Loading llama.cpp: {model_path}...")
         self.llm = Llama(
             model_path=model_path,
-            n_ctx=5120,            # 上下文窗口
-            n_gpu_layers=-1,       # -1 代表將所有層放入 GPU
-            verbose=False          # 關閉詳細日誌
+            n_ctx=4500,
+            n_gpu_layers=-1,
+            n_batch=128,
+            flash_attn=True,
+            verbose=False
         )
         
         # 3. 讀取動態免責聲明素材
@@ -30,12 +32,12 @@ class AORUSAssistant:
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 return f.read()
-        return "（暫無原廠免責聲明）"
+        return ""
 
     def generate_stream(self, user_query):
         """核心推論邏輯，使用 yield 回傳串流文字"""
         # A. 檢索 RAG 內容
-        related_chunks = self.retriever.retrieve(user_query, k=3)
+        related_chunks = self.retriever.retrieve(user_query, k=2)
         context_text = "\n".join(related_chunks)
         self.last_context = context_text
 
@@ -43,11 +45,11 @@ class AORUSAssistant:
 
         if has_chinese:
             L = {
-                "name": "Traditional Chinese (繁體中文)",
+                "name": "Traditional Chinese",
                 "start_info": "事實上，根據規格，",
                 "miss_example": "請問您想知道 AORUS MASTER 16 系列中哪個型號的資訊呢？BZH, BYH 還是 BXH？",
                 "start_none": "很抱歉，我是 AORUS MASTER 16 系列的 AI 助理，",
-                "competitor_example": "身為 AORUS MASTER 16 系列的 AI 助理，我的職責是為您提供最精確的 AORUS MASTER 16 產品細節。不便與他牌比較。不過，",
+                "competitor_example": "身為 AORUS MASTER 16 系列的 AI 助理，我的職責是提供 AORUS MASTER 16 的產品細節，不便與他牌比較。不過，",
                 "toxic_example": "身為 AORUS MASTER 16 系列的 AI 助理，我致力於提供專業且友善的產品服務，無法回應包含攻擊性或歧視性的言論。",
                 "start_oos": "不好意思，知識庫並沒有",
                 "start_yes": "沒錯！",
@@ -104,7 +106,7 @@ In <Answer>:
 - IF 'TOXIC': Follow style of '{L['toxic_example']}' and STOP.
 - IF 'CHITCHAT': Respond naturally as AORUS assistant, then STOP.
 - IF 'OUT_OF_SCOPE': Start with '{L['start_none']}', invite more questions, and STOP.
-- IF 'COMPETITOR': Follow style of '{L['competitor_example']}'. Highlight AORUS MASTER 16 (BZH/BYH/BXH) strengths using ONLY Knowledge Base specs. NO generic marketing terms (e.g., liquid cooling). Invite more questions and STOP.
+- IF 'COMPETITOR': Follow style of '{L['competitor_example']}'. Highlight AORUS MASTER 16 (BZH/BYH/BXH) strengths using ONLY Knowledge Base specs. NO generic marketing terms. Invite more questions and STOP.
 - IF 'MISSING_MODEL': Politely ask to clarify model (e.g., '{L['miss_example']}') and STOP.
 - IF 'CORRECTION': Start with '{L['start_info']}[Fact]'. Directly rectify the error and STOP.
 - IF 'No Data': Start with '{L['start_oos']} [Subject]...', invite more questions, and STOP.

@@ -6,7 +6,8 @@ import csv
 import gc
 import re
 import math
-from llama_cpp import Llama
+from src.vram_monitor import VRAMMonitor
+from deepeval.models.base_model import DeepEvalBaseLLM
 from tqdm import tqdm
 import pandas as pd
 from sentence_transformers import SentenceTransformer, CrossEncoder
@@ -14,7 +15,6 @@ from rouge_score import rouge_scorer
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.special import softmax
 from config import Config
-
 from src.main import AORUSAssistant
 from config import Config
 from src.eval_prompts import (
@@ -24,9 +24,12 @@ from src.eval_prompts import (
 )
 from src.utils import validate_query
 import asyncio
-from deepeval.models.base_model import DeepEvalBaseLLM
-
 import spacy
+
+monitor = VRAMMonitor()
+monitor.start()
+
+from llama_cpp import Llama
 
 class PrometheusJudge(DeepEvalBaseLLM):
     def __init__(self, model_path: str):
@@ -224,6 +227,10 @@ def run_generation_stage(input_csv, output_jsonl):
             
             print(f"Completed. ID:{row.get('ID', '?')} | TTFT: {ttft:.3f}s | TPS: {tps:.1f}")
             
+            total_ttft += ttft
+            total_tps += tps
+            record_count += 1
+
             # 寫入 JSONL
             record = {
                 "id": row.get("ID", ""),
@@ -513,12 +520,12 @@ if __name__ == "__main__":
 
     a = parser.parse_args()
 
-    # 1. 跑生成階段
-
     if a.stage in ["all", "st1"]:
-        run_generation_stage(input_csv, output_jsonl)
-    
-    # 2. 如果生成成功，接著跑評估階段
+        try:
+            run_generation_stage(input_csv, output_jsonl)
+        finally:
+            monitor.stop()
+        
     if a.stage in ["all", "st2"]:
         if a.stage == "st2":
             assert a.res != ""

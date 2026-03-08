@@ -32,6 +32,7 @@ dependencies = [
     "scikit-learn>=1.8.0",
     "spacy>=3.7.0,<3.8.0",
     "zh-core-web-trf",
+    "pynvml>=13.0.1",
 ]
 
 [[tool.uv.index]]

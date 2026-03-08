@@ -82,8 +82,8 @@ class AorusRetriever:
         # 第一階段：組裝【產品完整規格】
         # ==========================================
         for model_name, specs in data.items():
-            doc_display_lines = [f"【型號完整規格】{model_name}"]
-            doc_search_lines = [f"【型號完整規格】{model_name}"]
+            doc_display_lines = [f"型號完整規格 {model_name}"]
+            doc_search_lines = [f"型號完整規格 {model_name}"]
             
             for key, value in specs.items():
                 orig_v = str(value)
@@ -108,10 +108,10 @@ class AorusRetriever:
         # 第二階段：組裝【維度比較】 (橫向策略)
         # ==========================================
         for key, dim_dict in dimension_data.items():
-            disp_chunk = "\n".join([f"【{dim_dict['norm_key']}比較】"] + dim_dict['display'])
+            disp_chunk = "\n".join([f"{dim_dict['norm_key']}比較"] + dim_dict['display'])
             self.chunks.append(disp_chunk)
             
-            srch_chunk = "\n".join([f"【{dim_dict['norm_key']}比較】"] + dim_dict['search'])
+            srch_chunk = "\n".join([f"{dim_dict['norm_key']}比較"] + dim_dict['search'])
             search_chunks.append(srch_chunk)
 
         # ==========================================
@@ -126,7 +126,7 @@ class AorusRetriever:
                 diff_metrics.append(key)
 
         # 組裝超級比較 Chunk
-        comparison_title = "【AORUS MASTER 16 系列所有型號差異總覽】"
+        comparison_title = "AORUS MASTER 16 系列所有型號差異總覽"
         comparison_display = [comparison_title]
         comparison_search = [self.normalize_text(comparison_title)]
 
