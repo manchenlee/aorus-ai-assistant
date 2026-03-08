@@ -194,6 +194,10 @@ def run_generation_stage(input_csv, output_jsonl):
         csv_writer = csv.writer(out_csv)
         csv_writer.writerow(["id", "query", "expected_answer", "actual_answer", "ttft", "tps", "total_time"])
 
+        total_ttft = 0.0
+        total_tps = 0.0
+        record_count = 0
+
         for row in test_data:
             query = row["Question"]
 
@@ -244,8 +248,18 @@ def run_generation_stage(input_csv, output_jsonl):
                 record["total_time"]
             ])
 
+    avg_ttft = total_ttft / record_count if record_count > 0 else 0.0
+    avg_tps = total_tps / record_count if record_count > 0 else 0.0
+
     print(f"Stage 1 completed. Files saved:\n- {output_jsonl}\n- {output_csv_stage1}")
-    
+
+    print("=" * 50)
+    print(f"Performance Summary (Average of {record_count} queries):")
+    print("=" * 50)
+    print(f"   Avg TTFT: {avg_ttft:.3f} seconds")
+    print(f"   Avg TPS : {avg_tps:.2f} tokens/second")
+    print("=" * 50)
+
     # 🧹 物理級清空 VRAM 的關鍵步驟！
     print("Releasing VRAM...")
     del bot  # 刪除模型實例
@@ -462,7 +476,7 @@ def run_evaluation_stage_nonllm(input_jsonl):
     summary_df = pd.DataFrame(summary_data)
     
     print("\n" + "="*50)
-    print("📋 Evaluation Summary Report")
+    print("Evaluation Summary Report")
     print("="*50)
     print(summary_df.to_string(index=False))
     print("="*50)
