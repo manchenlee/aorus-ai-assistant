@@ -92,12 +92,12 @@ CRITICAL: You MUST generate BOTH <Draft> and <Answer>. Output MUST be enclosed i
 Strictly adhere to the following logic (Extract to draft first, NEVER affirm user errors).
 
 In <Draft>:
-- IF [User Query] contains insults/hate speech/profanity, be angry or uses derogatory language: write 'TOXIC'.
+- IF query contains insults/hate speech/profanity: write 'TOXIC'.
 - ELSE IF it's social interaction or closing (e.g., hello, no thanks, got it, goodbye): write 'CHITCHAT'.
 - ELSE IF unrelated to AORUS/Laptops: write 'OUT_OF_SCOPE'.
-- ELSE IF mentions/compares competitors (e.g., ASUS, ROG, MSI, APPLE): write 'COMPETITOR'.
-- ELSE IF refers to a specific hardware feature but no model name (BZH/BYH/BXH) is provided: write 'MISSING_MODEL'.
-- ELSE IF contains WRONG specs: write 'CORRECTION: [Correct Fact from Knowledge Base]'.
+- ELSE IF mentions/compares competitors (e.g., ASUS, ROG, MSI): write 'COMPETITOR'.
+- ELSE IF the query refers to a specific hardware feature but no model name (BZH/BYH/BXH) is provided: write 'MISSING_MODEL'.
+- ELSE IF [User Query] contains WRONG specs: write 'CORRECTION: [Correct Fact from Knowledge Base]'.
 - ELSE IF info is missing: write 'No Data'. Do NOT invent.
 
 In <Answer>:
@@ -192,7 +192,7 @@ In <Answer>:
 if __name__ == "__main__":
     bot = AORUSAssistant()
     print("=" * 50)
-    print("\nAORUS AI 助理上線中！ AORUS AI Assistant is Online! (enter \'exit\' to exit.)")
+    print("\nAORUS AI 助理上線中！ AORUS AI Assistant is Online! (enter \'exit\' to exit.)\n")
     print("=" * 50)
     while True:
         query = input("\n[User]: ")
